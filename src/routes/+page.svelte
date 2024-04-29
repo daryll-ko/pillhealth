@@ -93,7 +93,7 @@
 					</div>
 					<div class="border border-solid border-black h-48 flex flex-wrap">
 						{#each compartment.contents as med}
-							<div class={`${med.color} rounded-md h-2 w-2`}></div>
+							<div class={`${med.color} rounded-full h-4 w-4`}></div>
 						{/each}
 					</div>
 					<div class="flex flex-col gap-2 border border-black p-1">
