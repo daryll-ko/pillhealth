@@ -87,7 +87,9 @@
 				<div class={`w-20 ${i === current ? 'bg-yellow-400/25' : ''}`}>
 					<div class="border border-solid border-black p-2 text-sm">
 						Sector {i + 1}
-						<p class="text-xs">{compartment.contents.length} of {compartment.capacity}</p>
+						<p class={`text-xs ${compartment.contents.length === 0 ? 'text-red-500' : ''}`}>
+							{compartment.contents.length} of {compartment.capacity}
+						</p>
 					</div>
 					<div class="border border-solid border-black h-48 flex flex-wrap">
 						{#each compartment.contents as med}
