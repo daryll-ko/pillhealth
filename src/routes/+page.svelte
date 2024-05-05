@@ -84,15 +84,15 @@
 						{#if log.action === 'dispense'}
 							<p>
 								<code>[{log.date.toLocaleTimeString()}]</code>
-								<span class="text-blue-500 font-bold">Dispensed</span> pills from
+								<span class="text-blue-500 font-bold">Dispensed</span> from
 								<span class="text-blue-500 font-bold">Sector {log.sector + 1}</span>
 							</p>
 						{:else}
 							<p>
 								<code>[{log.date.toLocaleTimeString()}]</code>
-								<span class="text-red-500 font-bold">Refilled</span>
-								<span class="text-green-600 font-bold">Sector {log.sector + 1}</span>
-								with <span class="text-red-500 font-bold">{log.pill?.name}</span>
+								<span class="text-red-500 font-bold">Added</span>
+								<span class="text-green-600 font-bold">{log.pill?.name}</span>
+								to <span class="text-red-500 font-bold">Sector {log.sector + 1}</span>
 							</p>
 						{/if}
 					{/each}
