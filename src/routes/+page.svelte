@@ -80,22 +80,28 @@
 			<div class="flex flex-col items-start gap-2">
 				<p class="text-xl font-bold">Logs</p>
 				<div class="flex flex-col items-start">
-					{#each data.logs.slice(0, 14) as log}
-						{#if log.action === 'dispense'}
-							<p>
-								<code>[{log.date.toLocaleTimeString()}]</code>
-								<span class="text-blue-500 font-bold">Dispensed</span> from
-								<span class="text-blue-500 font-bold">Sector {log.sector + 1}</span>
-							</p>
-						{:else}
-							<p>
-								<code>[{log.date.toLocaleTimeString()}]</code>
-								<span class="text-red-500 font-bold">Added</span>
-								<span class="text-green-600 font-bold">{log.pill?.name}</span>
-								to <span class="text-red-500 font-bold">Sector {log.sector + 1}</span>
-							</p>
-						{/if}
-					{/each}
+					{#if data.logs.length > 0}
+						{#each data.logs.slice(0, 14) as log}
+							{#if log.action === 'dispense'}
+								<p>
+									<code>[{log.date.toLocaleTimeString()}]</code>
+									<span class="text-blue-500 font-bold">Dispensed</span> from
+									<span class="text-blue-500 font-bold">Sector {log.sector + 1}</span>
+								</p>
+							{:else}
+								<p>
+									<code>[{log.date.toLocaleTimeString()}]</code>
+									<span class="text-red-500 font-bold">Added</span>
+									<span class="text-green-600 font-bold">{log.pill?.name}</span>
+									to <span class="text-red-500 font-bold">Sector {log.sector + 1}</span>
+								</p>
+							{/if}
+						{/each}
+					{:else}
+						<p>
+							<code>[no logs to display]</code>
+						</p>
+					{/if}
 				</div>
 			</div>
 		</div>
