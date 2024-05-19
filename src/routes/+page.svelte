@@ -1,4 +1,5 @@
 <script lang="ts">
+	import logo from '$lib/assets/logo.png';
 	import { PILL_TYPES, COMPARTMENTS, COMPARTMENT_CAPACITY } from '$lib/constants';
 
 	export let data;
@@ -33,29 +34,29 @@
 <div class="h-screen flex justify-center items-center">
 	<div class="text-center flex flex-col gap-5">
 		<div class="font-bold">
+			<img width={300} src={logo} alt="logo"  />
 			<h1 class="text-3xl text-green-400">PillHealth</h1>
 			<h2 class="text-xl text-yellow-500">Your smart medicine box.</h2>
 		</div>
 
 		<div class="flex flex-row gap-10">
 			<div class="flex flex-col gap-5">
-				<div class="flex justify-center items-center mx-auto">
+				<div class="grid grid-cols-4 grid-rows-2 mx-auto gap-3">
 					{#each data.contents as compartment, i}
-						<div class={`w-20 ${i === current ? 'bg-yellow-400/25' : ''}`}>
-							<div class="border border-solid border-black p-2 text-sm">
+						<div
+							class={`w-20 border-2 border-solid border-gray-300 rounded-md ${i === current ? 'border-theme' : ''}`}
+						>
+							<div
+								class={`border-b-2 border-gray-300 border-solid text-sm ${i === current ? 'font-bold text-white bg-theme border-theme' : 'text-black/80'}`}
+							>
 								Sector {i + 1}
-								<p
-									class={`text-xs ${compartment.length === 0 ? 'text-red-500' : compartment.length === COMPARTMENT_CAPACITY ? 'text-blue-600' : ''}`}
-								>
-									{compartment.length} of {COMPARTMENT_CAPACITY}
-								</p>
 							</div>
-							<div class="border border-solid border-black h-48 flex flex-wrap">
+							<div class="h-20 flex flex-wrap bg-gray-100 rounded-md p-1">
 								{#each compartment as pill}
 									<div class={`${pill.color} rounded-full h-4 w-4`}></div>
 								{/each}
 							</div>
-							<div class="flex flex-col gap-2 border border-black p-1">
+							<!-- <div class="flex flex-col gap-2 border border-black p-1">
 								{#each PILL_TYPES as pill, j}
 									<button
 										disabled={compartment.length === COMPARTMENT_CAPACITY}
@@ -63,7 +64,7 @@
 										on:click={() => addToCompartment(i, j)}>+ {pill.name}</button
 									>
 								{/each}
-							</div>
+							</div> -->
 						</div>
 					{/each}
 				</div>
