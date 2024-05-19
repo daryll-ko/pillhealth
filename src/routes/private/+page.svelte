@@ -1,8 +1,8 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.png';
 	import { PILL_TYPES, COMPARTMENTS, COMPARTMENT_CAPACITY } from '$lib/constants';
-
-	export let data../$types.js;
+	// ../$types.js
+	export let data;
 
 	async function addToCompartment(index: number, pillNum: number) {
 		await fetch(`/add/${index}/${pillNum}`, { method: 'PUT' });
