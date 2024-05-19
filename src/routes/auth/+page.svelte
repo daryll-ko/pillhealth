@@ -1,7 +1,3 @@
-<!-- <div>
-        <a href="/auth">Login Page</a>
-</div> -->
-
 <script>
 	import logo from '$lib/assets/logo.png';
 	import plant from "$lib/assets/plant.jpeg";
