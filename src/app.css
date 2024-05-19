@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+	.debug {
+		@apply border border-solid border-black sm:border-red-400 md:border-orange-400 lg:border-green-400 xl:border-blue-400 2xl:border-violet-400;
+	}
+}
