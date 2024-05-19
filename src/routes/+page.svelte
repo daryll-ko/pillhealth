@@ -17,6 +17,8 @@
 		}
 	}
 
+
+
 	let current = 0;
 	setInterval(() => (current = (current + 1) % COMPARTMENTS), 1000);
 
