@@ -1,4 +1,4 @@
-<!-- <script> // Coded taken from https://supabase.com/docs/guides/auth/server-side/sveltekit
+<script> // Coded taken from https://supabase.com/docs/guides/auth/server-side/sveltekit
 	export let data;
 	$: ({ supabase } = data);
 
@@ -18,4 +18,4 @@
 </header>
 <main>
 	<slot />
-</main> -->
+</main>
