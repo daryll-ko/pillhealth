@@ -6,7 +6,7 @@
 <div class="flex flex-row h-screen">
 	<div class="w-[70%] flex flex-col gap-10 justify-center items-center gap-10">
 		<img src={logo} width="500" alt="PillHealth logo" />
-		<form class="w-[50%] flex flex-col gap-8">
+		<form class="w-[50%] flex flex-col gap-8" method="POST" action="?/login">
 			<h1 class="font-bold text-4xl">Login</h1>
 			<div class="flex flex-col gap-5">
 				<div class="relative w-full">
@@ -33,13 +33,13 @@
 					/>
 				</div>
 			</div>
-		</form>
 		<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
 			>Login</button
 		>
+		</form>
 		<div class="relative bg-[#c0c0c0]/60 w-[50%] h-[2px] rounded-md">
 			<p class="absolute bg-white w-[60%] -top-3 left-28 text-center">
-				Don't have an account? <a href="/" class="text-theme font-bold underline">Register</a>
+				Don't have an account? <a href='/auth/register'>Register</a>
 			</p>
 		</div>
 	</div>
