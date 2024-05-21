@@ -1,6 +1,8 @@
 export interface Pill {
 	name: string;
+	description: string;
 	color: string;
+	sectors: number[];
 }
 
 export interface Log {

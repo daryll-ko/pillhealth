@@ -103,7 +103,7 @@
 			>
 		</div>
 		<div class="flex flex-col gap-5 w-full">
-			{#each PILL_TYPES as pill, j}
+			{#each data.medicine as pill, j}
 				<div class="rounded-lg bg-white flex flex-col justify-center gap-2 px-3 pb-2 pt-3">
 					<div class="flex flex-row justify-between items-center">
 						<span class={`${pill.color} rounded-full px-3 py-1`}>{pill.name}</span>
