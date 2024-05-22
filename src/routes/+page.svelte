@@ -1,12 +1,12 @@
 <script>
-  import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
-  onMount(() => {
-    goto('/auth/login');
-  });
+	onMount(() => {
+		goto('/auth/login');
+	});
 </script>
 
 <main>
-  <p>Navigating to login...</p>
+	<p>Navigating to login...</p>
 </main>

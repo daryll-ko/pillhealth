@@ -1,6 +1,6 @@
 <script>
 	import logo from '$lib/assets/logo.png';
-	import plant from "$lib/assets/plant.jpeg";
+	import plant from '$lib/assets/plant.jpeg';
 </script>
 
 <div class="flex flex-row h-screen">
@@ -33,9 +33,9 @@
 					/>
 				</div>
 			</div>
-		<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
-			>Register</button
-		>
+			<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
+				>Register</button
+			>
 		</form>
 		<!-- <form method="POST" action="?/signup">
 			<div class="relative bg-[#c0c0c0]/60 w-[50%] h-[2px] rounded-md">
