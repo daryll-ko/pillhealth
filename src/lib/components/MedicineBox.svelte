@@ -14,7 +14,10 @@
 		user.sector_6,
 		user.sector_7,
 		user.sector_8
-	];
+	].map((timestamp) => timestamp ? timestamp : new Date(Date.now()+ 7*24*60*60*1000)); //TEMPORARY CHANGE
+
+	$: timestamp : console.log('timestamps', timestamps);
+
 
 	$: medicinesPerSector = medicines
 		.flatMap((medicine) =>
@@ -29,10 +32,13 @@
 			[...Array(8)].map(() => [] as Medicine[])
 		);
 
+		console.log(medicinesPerSector);
 	$: sectors = timestamps.map((timestamp, i) => ({
-		timestamp: i === 2 ? new Date() : timestamp,
+		timestamp: i === 2 ? new Date() : timestamp,  
 		medicines: timestamp > new Date() ? medicinesPerSector[i] : []
 	}));
+
+	$: sectors: console.log('sectors', sectors);
 
 	let selectedSectorValue = -1;
 	selectedSector.subscribe((val) => (selectedSectorValue = val));
@@ -65,15 +71,15 @@
 					<div
 						class={`flex flex-col items-center justify-center pb-1 ${i === current ? 'bg-[#f0fff8]' : ''}`}
 					>
-						<p class="text-lg -mb-1">{timestamp.toLocaleString('default', { day: 'numeric' })}</p>
-						<p>{timestamp.toLocaleString('default', { month: 'long' })}</p>
+						<p class="text-lg -mb-1">{timestamp ? timestamp.toLocaleString('default', { day: 'numeric' }) : ''}</p>
+						<p>{timestamp ? timestamp.toLocaleString('default', { month: 'long' }) : ''}</p>
 					</div>
 				</div>
 				<div
 					class={`flex flex-col justify-center items-center text-lg w-full text-md ${i === current ? 'bg-[#f0fff8]' : ''}`}
 				>
-					<p>{timestamp.toLocaleString('default', { weekday: 'long' })}</p>
-					<p>{timestamp.toLocaleString('default', { timeStyle: 'short' })}</p>
+					<p>{timestamp ? timestamp.toLocaleString('default', { weekday: 'long' }) : ''}</p>
+					<p>{timestamp ? timestamp.toLocaleString('default', { timeStyle: 'short' }) : 'set time'}</p>
 				</div>
 			</div>
 			<div

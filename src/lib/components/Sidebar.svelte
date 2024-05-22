@@ -11,7 +11,7 @@
 	$: medicinesToShow =
 		selectedSectorValue === -1
 			? medicines
-			: medicines.filter((medicine) => medicine.in_sectors.has(selectedSectorValue));
+			: medicines.filter((medicine) => medicine.in_sectors.includes(selectedSectorValue));
 
 	selectedSector.subscribe((val) => (selectedSectorValue = val));
 

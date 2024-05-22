@@ -1,9 +1,9 @@
 import { COMPARTMENT_CAPACITY } from './constants';
-import type { Database, Log, Pill } from './types';
-import { generateContents } from './utils';
+import type { Database, Log, Medicine } from './types';
+import { generateDatabase } from './utils';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-export async function getContents(supabase: SupabaseClient): Promise<Pill[][]> {
+export async function getContents(supabase: SupabaseClient): Promise<Medicine[][]> {
 	const { data, error } = await supabase
 		.from('medicine')
 		.select();
@@ -13,9 +13,9 @@ export async function getContents(supabase: SupabaseClient): Promise<Pill[][]> {
         throw error;
     }
 
-	const res: Pill[][] = [[], [], [], [], [], [], [], []];
-	data.forEach((pills: Pill) => {
-        pills.sectors.forEach((sector) => {
+	const res: Medicine[][] = [[], [], [], [], [], [], [], []];
+	data.forEach((pills: Medicine) => {
+        pills.in_sectors.forEach((sector) => {
             res[sector - 1].push(pills);
         });
     });
@@ -49,7 +49,7 @@ export async function setDispenseTime(sector: number, time: Date, supabase: Supa
 	}
 }
 
-export async function getMedicines(supabase: SupabaseClient): Promise<Pill[]> {
+export async function getMedicines(supabase: SupabaseClient): Promise<Medicine[]> {
 	const { data, error } = await supabase
 		.from('medicine')
 		.select();
@@ -58,17 +58,18 @@ export async function getMedicines(supabase: SupabaseClient): Promise<Pill[]> {
 		console.error('Error getting contents:', error);
 		throw error;
 	}
+	console.log("getMedicines", data);
 	return data;
 }
 
-export async function addMedicine(medicine: Pill, supabase: SupabaseClient) {
+export async function addMedicine(medicine: Medicine, supabase: SupabaseClient) {
 	const { error } = await supabase
 		.from('medicine')
 		.insert({
 			name: medicine.name,
 			description: medicine.description,
 			color: medicine.color,
-			sectors: medicine.sectors
+			in_sectors: medicine.in_sectors
 		});
 
 	if (error) {
@@ -77,7 +78,7 @@ export async function addMedicine(medicine: Pill, supabase: SupabaseClient) {
 	}
 }
 
-export async function removeMedicine(medicine: Pill, supabase: SupabaseClient) {
+export async function removeMedicine(medicine: Medicine, supabase: SupabaseClient) {
 	const { error } = await supabase
 		.from('medicine')
 		.delete()
@@ -89,14 +90,14 @@ export async function removeMedicine(medicine: Pill, supabase: SupabaseClient) {
 	}
 }
 
-export async function editMedicine(medicine: Pill, supabase: SupabaseClient) {
+export async function editMedicine(medicine: Medicine, supabase: SupabaseClient) {
 	const { error } = await supabase
 		.from('medicine')
 		.update({
 			name: medicine.name,
 			description: medicine.description,
 			color: medicine.color,
-			sectors: medicine.sectors
+			in_sectors: medicine.in_sectors
 		})
 		.eq('name', medicine.name);
 
@@ -125,7 +126,7 @@ export async function addPillToSector(pillname: string, sector: number, supabase
 	console.log('sector_data', data);
 
 	const medicine = data[0];
-	const sectors = medicine.sectors;
+	const sectors = medicine.in_sectors;
 	if (sectors.includes(sector)) {
 		console.error('Medicine already in sector');
 		throw new Error('Medicine already in sector');
@@ -136,7 +137,7 @@ export async function addPillToSector(pillname: string, sector: number, supabase
 	const { error: updateError } = await supabase
 		.from('medicine')
 		.update({
-			sectors: sectors
+			in_sectors: sectors
 		})
 		.eq('name', pillname);
 
@@ -163,7 +164,7 @@ export async function removePillFromSector(pillname: string, sector: number, sup
 	}
 
 	const medicine = data[0];
-	const sectors = medicine.sectors;
+	const sectors = medicine.in_sectors;
 	if (!sectors.includes(sector)) {
 		console.error('Medicine not in sector');
 		throw new Error('Medicine not in sector');
@@ -174,7 +175,7 @@ export async function removePillFromSector(pillname: string, sector: number, sup
 	const { error: updateError } = await supabase
 		.from('medicine')
 		.update({
-			sectors: newSectors
+			in_sectors: newSectors
 		})
 		.eq('name', pillname);
 
@@ -199,12 +200,24 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
     }
 }
 
-// export async function addUser(supabase: SupabaseClient) {
-		
-// } //harder than i thought
+export async function getUser(supabase: SupabaseClient) {
+	const { data, error } = await supabase
+		.from('user')
+		.select()
 
+	if (error) {
+		console.error('Error getting user:', error);
+		throw error;
+	}
 
+	if (data.length === 0) {
+		console.error('User not found');
+		throw new Error('User not found');
+	}
+	console.log("getUser", data);
 
+	return data;
+}
 
 
 // mock database
@@ -218,6 +231,6 @@ export function getLogs(): Log[] {
 	return db.logs;
 }
 
-export function getUsers(): User[] {
-	return db.users;
-}
+// export function getUsers(): User[] {
+// 	return db.users;
+// }
