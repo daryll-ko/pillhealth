@@ -1,23 +1,56 @@
-import type { Pill } from './types';
+export const NUM_SECTORS = 8;
+export const MAX_IN_SECTOR = 10;
+export const LOG_TYPES = ['dispense', 'take', 'refill'] as const;
 
-export const COMPARTMENTS = 8;
-export const COMPARTMENT_CAPACITY = 10;
-
-export const PILL_TYPES: Pill[] = [
-	{
-		name: 'med 1',
-		color: 'bg-red-300'
-	},
-	{
-		name: 'med 2',
-		color: 'bg-blue-400'
-	},
-	{
-		name: 'med 3',
-		color: 'bg-green-400'
-	},
-	{
-		name: 'med 4',
-		color: 'bg-orange-400'
-	}
+export const MEDICINE_NAMES = [
+	'Transonide',
+	'Effivirase',
+	'Solafenide',
+	'Amrelin',
+	'Lansoramine',
+	'Tristone',
+	'Advarix Parogine',
+	'Estroracin Thalitacept',
+	'Vitratoin Ageneset',
+	'Preponel Hydrolin',
+	'Bactrolise',
+	'Agelinum',
+	'Dextroprin',
+	'Oxymorenone',
+	'Abitorol',
+	'Marnesin',
+	'Anetora Phosfenac',
+	'Aciprex Amphonosine',
+	'Doctocept Robabrate',
+	'Hyalutecan Glucoprox',
+	'Alogderal',
+	'Insurolac',
+	'Flutaprox',
+	'Empizumab',
+	'Ampylac',
+	'Olmeveset',
+	'Zicorall Adrenamine',
+	'Imisine Tamonoin',
+	'Norbinol Alapentin',
+	'Palodene Omnistin',
+	'Alcanamic',
+	'Somaferon',
+	'Vibracetam',
+	'Albuvirenz',
+	'Serodafinil',
+	'Immunamic',
+	'Bextanyl Beclolimus',
+	'Transpirin Acetanalin',
+	'Synthemumab Cyprodine',
+	'Ganitrisin Nedoferal',
+	'Flexemectin',
+	'Belatosine',
+	'Aboboveset',
+	'Primamumab',
+	'Belavice',
+	'Benazetorol',
+	'Alfutora Fluadeine',
+	'Tercocelex Estrazine',
+	'Rivastadil Altazoxane',
+	'Kinoxone Tretizine'
 ];

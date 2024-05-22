@@ -207,25 +207,17 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 
 
 
-const db: Database = {
-	contents: generateContents(),
-	logs: []
-};
+// mock database
+const db: Database = generateDatabase();
 
-// export function getContents(): Pill[][] {
-// 	return db.contents;
+// export function getMedicines(): Medicine[] {
+// 	return db.medicines;
 // }
 
 export function getLogs(): Log[] {
 	return db.logs;
 }
 
-export async function addToCompartment(index: number, pill: Pill) {
-	if (db.contents[index].length < COMPARTMENT_CAPACITY) {
-		db.contents[index].push(pill);
-	}
+export function getUsers(): User[] {
+	return db.users;
 }
-
-// export async function clearCompartment(index: number) {
-// 	db.contents[index] = [];
-// }

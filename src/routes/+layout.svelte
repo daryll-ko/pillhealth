@@ -1,7 +1,7 @@
 <script>
 	// Code taken from https://supabase.com/docs/guides/auth/server-side/sveltekit
 
-	import "../app.css";
+	import '../app.css';
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 

@@ -1,6 +1,6 @@
 <script>
 	import logo from '$lib/assets/logo.png';
-	import plant from "$lib/assets/plant.jpeg";
+	import plant from '$lib/assets/plant.jpeg';
 </script>
 
 <div class="flex flex-row h-screen">
@@ -33,13 +33,13 @@
 					/>
 				</div>
 			</div>
-		<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
-			>Login</button
-		>
+			<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
+				>Login</button
+			>
 		</form>
 		<div class="relative bg-[#c0c0c0]/60 w-[50%] h-[2px] rounded-md">
 			<p class="absolute bg-white w-[60%] -top-3 left-28 text-center">
-				Don't have an account? <a href='/auth/register'>Register</a>
+				Don't have an account? <a href="/auth/register">Register</a>
 			</p>
 		</div>
 	</div>
