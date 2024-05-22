@@ -1,26 +1,17 @@
-import { COMPARTMENT_CAPACITY } from './constants';
-import type { Database, Log, Pill } from './types';
-import { generateContents } from './utils';
+import type { Database, Log, Medicine, User } from './types';
+import { generateDatabase } from './utils';
 
-const db: Database = {
-	contents: generateContents(),
-	logs: []
-};
+// mock database
+const db: Database = generateDatabase();
 
-export function getContents(): Pill[][] {
-	return db.contents;
+export function getMedicines(): Medicine[] {
+	return db.medicines;
 }
 
 export function getLogs(): Log[] {
 	return db.logs;
 }
 
-export async function addToCompartment(index: number, pill: Pill) {
-	if (db.contents[index].length < COMPARTMENT_CAPACITY) {
-		db.contents[index].push(pill);
-	}
-}
-
-export async function clearCompartment(index: number) {
-	db.contents[index] = [];
+export function getUsers(): User[] {
+	return db.users;
 }
