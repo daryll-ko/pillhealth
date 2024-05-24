@@ -21,7 +21,9 @@ cron.schedule('*/15 * * * *', async () => {  // every 15 minutes
 	console.log('Inserting medicine');
 	const medicine = {
 		name: 'New Medicine',
-		quantity: 30
+		color: '#ffffff',
+		description: 'This is a new medicine',
+		in_sectors: [1, 2, 3, 4, 5, 6, 7, 8],
 	};
 	await supabase.from('medicine').insert(medicine);
 });
