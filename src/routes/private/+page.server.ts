@@ -1,15 +1,13 @@
 import * as db from '$lib/database';
-import { supabase } from '$lib/supabaseClient';
-// import { Medicine, Sector } from '$lib/types';
+import { getMedicines, getUser } from '$lib/database';
+// import { supabase } from '$lib/supabaseClient';
 
-export async function load() {
-	const { data: MedicineData } = await supabase.from('medicine').select();
-	const { data: SectorData } = await supabase.from('sector').select();
-	console.log(SectorData);
+export async function load({locals:{supabase}}) {
+	// const { data: MedicineData } = await supabase.from('medicine').select();
+	// const { data: SectorData } = await supabase.from('sector').select();
 	return {
-		contents: db.getContents(),
 		logs: db.getLogs(),
-		medicine: MedicineData ?? [],
-		sector: SectorData ?? []
+		medicines: await getMedicines(supabase),
+		users: await getUser(supabase)
 	};
 }
