@@ -18,7 +18,6 @@
 
 	$: timestamp : console.log('timestamps', timestamps);
 
-
 	$: medicinesPerSector = medicines
 		.flatMap((medicine) =>
 			Array.from(medicine.in_sectors).map((sector) => ({
@@ -32,13 +31,10 @@
 			[...Array(8)].map(() => [] as Medicine[])
 		);
 
-		console.log(medicinesPerSector);
 	$: sectors = timestamps.map((timestamp, i) => ({
 		timestamp: i === 2 ? new Date() : timestamp,  
 		medicines: timestamp > new Date() ? medicinesPerSector[i] : []
 	}));
-
-	$: sectors: console.log('sectors', sectors);
 
 	let selectedSectorValue = -1;
 	selectedSector.subscribe((val) => (selectedSectorValue = val));

@@ -67,7 +67,6 @@ function generateLog(medicineId: number, userId: number): Log {
 		type: LOG_TYPES[randInt(0, 3)],
 		medicine: medicineId,
 		sector: randInt(0, NUM_SECTORS),
-		dose: randInt(0, 4) / 4,
 		user_id: userId
 	};
 }

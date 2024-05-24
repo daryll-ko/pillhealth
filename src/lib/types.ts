@@ -1,9 +1,9 @@
 export interface Log {
 	timestamp: Date;
 	type: 'dispense' | 'take' | 'refill';
-	medicine: number;
+	medicine_name: string;
+	medicine_description: string;
 	sector: number;
-	dose: number;
 	user_id: number;
 }
 
