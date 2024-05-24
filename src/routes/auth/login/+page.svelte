@@ -1,6 +1,9 @@
 <script>
 	import logo from '$lib/assets/logo.png';
 	import plant from '$lib/assets/plant.jpeg';
+	import { Textfield } from 'svelte-mui';
+
+  let value = '';
 </script>
 
 <div class="flex flex-row h-screen">
@@ -8,28 +11,42 @@
 		<img src={logo} width="500" alt="PillHealth logo" />
 		<form class="w-[50%] flex flex-col gap-8" method="POST" action="?/login">
 			<h1 class="font-bold text-4xl">Login</h1>
-			<div class="flex flex-col gap-5">
-				<div class="relative w-full">
-					<input
+			<div class="flex flex-col gap-1">
+				<div class="relative w-full bg-white">
+					<!-- <input
 						class="peer bg-white w-full h-full py-3 px-4 border-2 border-solid border-[#c0c0c0] rounded-md focus:outline-none focus:border-theme"
 						name="email"
 						type="email"
+					/> -->
+					<Textfield
+						autocomplete="off"
+						type="email"
+						label="Email"
+						name="email"
+						required
+						message="Please enter a valid email address"
+						outlined
 					/>
-					<span
-						class="absolute bg-white px-1 -top-2 left-4 text-xs rounded-md text-[#c0c0c0] font-bold peer-focus:text-theme"
-						>Email</span
-					>
 				</div>
-				<div class="relative w-full">
-					<span
+				<div class="relative w-full bg-white">
+					<!-- <span
 						class="absolute bg-white px-1 -top-2 left-4 text-xs rounded-md text-[#c0c0c0] font-bold peer-focus:text-theme"
 						>Password</span
-					>
-					<input
+					> -->
+					<!-- <input
 						class="w-full h-full bg-white py-3 px-4 border-2 border-solid border-[#c0c0c0] rounded-md focus:outline-none focus:border-theme focus:text-theme"
 						name="password"
 						type="password"
 						placeholder="Password"
+					/> -->
+					<Textfield
+						autocomplete="off"
+						type="password"
+						label="Password"
+						name="password"
+						required
+						message="Must be at least 8 characters long"
+						outlined
 					/>
 				</div>
 			</div>
