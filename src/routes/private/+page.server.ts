@@ -11,3 +11,19 @@ export async function load({locals:{supabase}}) {
 		users: await getUser(supabase)
 	};
 }
+
+// cron node
+import { supabase } from '$lib/supabaseClient';
+import cron from 'node-cron';
+
+cron.schedule('*/15 * * * *', async () => {  // every 15 minutes
+	// insert medicine
+	console.log('Inserting medicine');
+	const medicine = {
+		name: 'New Medicine',
+		quantity: 30
+	};
+	await supabase.from('medicine').insert(medicine);
+});
+
+console.log('Cron job started');

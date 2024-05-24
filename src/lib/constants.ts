@@ -1,6 +1,7 @@
 export const NUM_SECTORS = 8;
 export const MAX_IN_SECTOR = 10;
 export const LOG_TYPES = ['dispense', 'take', 'refill'] as const;
+export const COMPARTMENT_CAPACITY = 30;
 
 export const MEDICINE_NAMES = [
 	'Transonide',

@@ -16,11 +16,15 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
+		"@smui/form-field": "^7.0.0",
+		"@smui/textfield": "^7.0.0",
 		"@supabase/supabase-js": "^2.43.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/cronitor": "^2.3.0",
 		"@types/eslint": "^8.56.0",
+		"@types/node-cron": "^3.0.11",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
 		"autoprefixer": "^10.4.19",
@@ -34,6 +38,7 @@
 		"supabase": "^1.167.4",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
+		"svelte-mui": "^0.5.10",
 		"tailwindcss": "^3.4.3",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
@@ -42,6 +47,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/ssr": "^0.3.0"
+		"@supabase/ssr": "^0.3.0",
+		"cronitor": "^2.4.0",
+		"node-cron": "^3.0.3"
 	}
 }
