@@ -6,6 +6,9 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 
+import { GOOGLE_EMAIL } from "$env/static/private";
+import transporter from "$lib/emailSetup.server.js";
+
 const supabase: Handle = async ({ event, resolve }) => {
 	/**
 	 * Creates a Supabase client specific to this server request.
@@ -80,5 +83,52 @@ const authGuard: Handle = async ({ event, resolve }) => {
 
 	return resolve(event);
 };
+
+// cron node
+import cron from 'node-cron';
+
+// cron.schedule('*/1 * * * *', async () => {  // every 1 minute
+// 	console.log('Sending Email');
+// 	try {
+// 		// const formData = await request.formData();
+// 		const email = "wtmaceda@up.edu.ph";
+// 		const subject = "Test subject";
+// 		const body = "this is a test email"
+// 		console.log(body);
+// 		let html = `<h2>Hi!</h2><pre>${body}</pre>`;
+
+// 		const message = {
+// 			from: GOOGLE_EMAIL,
+// 			to: email,
+// 			bcc: "jelamay.yap@gmail.com",
+// 			subject: subject,
+// 			text: body,
+// 			html: html,
+// 		};
+
+// 		const sendEmail = async (message) => {
+// 			await new Promise((resolve, reject) => {
+// 				transporter.sendMail(message, (err, info) => {
+// 					if (err) {
+// 						console.error(err);
+// 						reject(err);
+// 					} else {
+// 						resolve(info);
+// 					}
+// 				});
+// 			});
+// 		};
+
+// 		await sendEmail(message);
+
+// 		return {
+// 			success: "Email is sent",
+// 		};
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// });
+
+// console.log('Cron job started');
 
 export const handle: Handle = sequence(supabase, authGuard);

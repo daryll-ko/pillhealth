@@ -24,7 +24,6 @@
 						label="Email"
 						name="email"
 						required
-						message="Please enter a valid email address"
 						outlined
 					/>
 				</div>
@@ -45,7 +44,6 @@
 						label="Password"
 						name="password"
 						required
-						message="Must be at least 8 characters long"
 						outlined
 					/>
 				</div>
