@@ -50,6 +50,7 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.3.0",
 		"cronitor": "^2.4.0",
+		"flowbite-svelte": "^0.46.1",
 		"node-cron": "^3.0.3",
 		"nodemailer": "^6.9.13"
 	}

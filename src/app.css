@@ -7,3 +7,12 @@
 		@apply border border-solid border-black sm:border-red-400 md:border-orange-400 lg:border-green-400 xl:border-blue-400 2xl:border-violet-400;
 	}
 }
+
+@layer components {
+	.btn {
+		@apply bg-theme/80 text-white rounded-xl text-xl font-bold py-2 px-6 hover:bg-theme transition-all disabled:bg-gray-300;
+	}
+	.icon-btn {
+		@apply w-8 h-8 flex justify-center items-center text-white transition-all disabled:text-white/20;
+	}
+}

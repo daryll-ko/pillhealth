@@ -2,7 +2,7 @@ import { NUM_SECTORS, LOG_TYPES, MEDICINE_NAMES } from './constants';
 import type { Database, Log, Medicine, User } from './types';
 
 // [min, max)
-function randInt(min: number, max: number): number {
+export function randInt(min: number, max: number): number {
 	return min + Math.floor(Math.random() * (max - min));
 }
 
@@ -44,7 +44,7 @@ function rgbToHex([r, g, b]: [number, number, number]): string {
 	return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-function randColor(): string {
+export function randColor(): string {
 	return rgbToHex(hsv2rgb([Math.random(), 0.5, 0.95]));
 }
 
@@ -65,17 +65,19 @@ function generateLog(medicineId: number, userId: number): Log {
 	return {
 		timestamp: randDate(),
 		type: LOG_TYPES[randInt(0, 3)],
-		medicine: medicineId,
+		medicine_name: '',
+		medicine_description: '',
+		// medicine: medicineId,
 		sector: randInt(0, NUM_SECTORS),
-		user_id: userId
+		user_id: String(userId)
 	};
 }
 
 function generateMedicine(medicineId: number, userId: number): Medicine {
-	const in_sectors = new Set<number>();
+	const in_sectors = Array<number>(0);
 	for (let i = 0; i < NUM_SECTORS; ++i) {
 		if (randInt(0, 2) === 0) {
-			in_sectors.add(i);
+			in_sectors.push(i);
 		}
 	}
 	return {
@@ -83,14 +85,14 @@ function generateMedicine(medicineId: number, userId: number): Medicine {
 		name: MEDICINE_NAMES[medicineId % MEDICINE_NAMES.length],
 		color: randColor(),
 		description: 'Success is not final',
-		user_id: userId,
+		user_id: String(userId),
 		in_sectors
 	};
 }
 
 function generateUser(userId: number): User {
 	return {
-		user_id: userId,
+		user_id: String(userId),
 		email: `${randString(3)}@gmail.com`,
 		sector_1: randDate(),
 		sector_2: randDate(),

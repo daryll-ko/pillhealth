@@ -1,18 +1,14 @@
 <script lang="ts">
-	import Navbar from '$lib/components/Navbar.svelte';
-  	import { ExpansionPanel } from 'svelte-mui';
-	import faq from '$lib/assets/FAQ.png';
-	export let data;
-  	let group = '';
+  import { ExpansionPanel } from 'svelte-mui';
+	let group = '';
 
-  	const onchage = ({ detail }) => {
-    // console.log(detail.expanded ? 'open' : 'close', detail.name);
+	const onchage = ({ detail }) => {
+	// console.log(detail.expanded ? 'open' : 'close', detail.name);
   };
 </script>
 
 <div class="flex flex-row h-screen bg-[url('/src/lib/assets/FAQ.png')] bg-right bg-no-repeat bg scaled-bg mb-10"> 
 	<div class="flex flex-col w-[80%] gap-8">
-		<Navbar {data} />
 		<div class="text-[#333333] text-left flex flex-col gap-3 ml-20 w-[70%]">
 			<h1 class="text-4xl font-bold">Frequently Asked Questions</h1>
 			<p class="text-2xl mb-10">Learn how PillHealth can treat you better.</p>

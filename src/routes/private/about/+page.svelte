@@ -1,15 +1,10 @@
 <script lang="ts">
-	import Navbar from '$lib/components/Navbar.svelte';
-	export let data;
-    import logo from '$lib/assets/logo.png'
+    
 </script>
 
 <!-- Adapted from https://tuk.dev/components/marketing/page_section/about -->
 
 <div class="flex flex-col h-screen">
-	<div class="flex">
-  	<Navbar {data} />
-	</div>
 	<div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
 		<div class="flex flex-col lg:flex-row justify-between gap-8">
 				<div class="w-full lg:w-5/12 flex flex-col justify-center">

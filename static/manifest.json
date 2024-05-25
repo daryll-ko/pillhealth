@@ -1,0 +1,14 @@
+{
+	"name": "PillHealth",
+	"description": "Your smart medicine box.",
+	"display": "standalone",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "favicon.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	]
+}
