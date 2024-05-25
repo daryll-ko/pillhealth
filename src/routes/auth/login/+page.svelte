@@ -2,8 +2,6 @@
 	import logo from '$lib/assets/logo.png';
 	import plant from '$lib/assets/plant.jpeg';
 	import { Textfield } from 'svelte-mui';
-
-  let value = '';
 </script>
 
 <div class="flex flex-row h-screen">

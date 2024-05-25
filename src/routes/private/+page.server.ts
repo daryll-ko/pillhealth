@@ -1,22 +1,18 @@
 import * as db from '$lib/database';
-import { getMedicines, getUser } from '$lib/database';
-// import { supabase } from '$lib/supabaseClient';
 
-export async function load({locals:{supabase}}) {
-	// const { data: MedicineData } = await supabase.from('medicine').select();
-	// const { data: SectorData } = await supabase.from('sector').select();
+export async function load({ locals: { supabase } }) {
 	return {
-		logs: db.getLogs(),
-		medicines: await getMedicines(supabase),
-		users: await getUser(supabase)
+		medicines: await db.getMedicines(supabase),
+		userData: await db.getUser(supabase)
 	};
 }
 
 // cron node
-import { supabase } from '$lib/supabaseClient';
 import cron from 'node-cron';
+import { supabase } from '$lib/supabaseClient';
 
-cron.schedule('*/15 * * * *', async () => {  // every 15 minutes
+cron.schedule('*/15 * * * *', async () => {
+	// every 15 minutes
 	// insert medicine
 	console.log('Inserting medicine');
 	const medicine = {
