@@ -77,6 +77,8 @@ export const actions: Actions = {
 		const sector = Number(formData.get('sector')); 
 		const date = new Date(String(formData.get("date")));
 
+		console.log("setTime gets", date);
+
 		await db.setDispenseTime(sector, date, supabase);
 
 		return {

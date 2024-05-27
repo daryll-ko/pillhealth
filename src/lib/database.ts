@@ -14,6 +14,7 @@ export async function setDispenseTime(sector: number, time: Date, supabase: Supa
 	if (loggedInUID) {
 		const updateData: { [key: string]: Date } = {};
 		updateData[columnName] = time;
+		console.log("setDispenseTime gets", time);
 
 		const { error } = await supabase.from('user').update(updateData).eq('user_id', loggedInUID);
 
@@ -312,6 +313,8 @@ export async function addLog(log: Log, supabase: SupabaseClient) {
 
 export async function getUser(supabase: SupabaseClient): Promise<User> {
 	const { data, error } = await supabase.from('user').select().single();
+
+	console.log("getUser gets", data);
 
 	if (error) {
 		console.error('Error getting user:', error);
