@@ -107,7 +107,7 @@ export async function createJob (date: Date, sector: number, supabase: SupabaseC
 			await clearCompartment(sector, supabase);
 			await createEmail(1, supabase, medList);
 		}, // onTick
-		'UTC+8'
+		'UTC'
 	);
 	cronJobs.set(`sector_${sector}`, job);
 	job.start();

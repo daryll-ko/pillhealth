@@ -65,14 +65,6 @@
 			window.alert('Please select a date and time');
 			return;
 		}
-		const req = {
-			sector,
-			time
-		};
-		fetch('/private/api/user', {
-			method: 'PUT',
-			body: JSON.stringify(req)
-		});
 	}
 
 	let formElement;
@@ -115,11 +107,13 @@
 				</p>
 				<div class="flex flex-col items-center gap-2">
 					<input
+						name="date"
 						class="text-black rounded-md px-1 w-[100%] text-sm"
 						type="datetime-local"
 						bind:value={date}
 					/>
 					<button
+						formaction="?/setTime"
 						on:click={() => updateDate(selectedSectorValue, date)}
 						class="rounded-full h-6 font-bold flex justify-center items-center hover:scale-110 text-white transition-all"
 						><span class="bg-yellow-500 pr-2 pl-2 rounded-full mt-2">Save time</span></button
