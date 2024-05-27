@@ -107,7 +107,7 @@ export async function createJob (date: Date, sector: number, supabase: SupabaseC
 			await clearCompartment(sector, supabase);
 			await createEmail(1, supabase, medList);
 			setTimeout(() => {
-				location.reload(); // Reload the page
+				window.location.reload(); // Reload the page
 			}, 3000); 
 		}, // onTick
 	);
