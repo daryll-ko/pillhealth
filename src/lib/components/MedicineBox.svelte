@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { selectedSector } from '$lib/stores';
 	import type { Medicine, User } from '$lib/types';
-	import { minimatch } from 'minimatch';
 
 	export let medicines: Medicine[];
 	export let user: User;
@@ -17,6 +17,7 @@
 		user.sector_8
 	].map((timestamp) => (timestamp ? new Date(timestamp) : null ));
 
+	let medicinesPerSector: Medicine[][];
 	$: medicinesPerSector = medicines
 		.flatMap((medicine) =>
 			Array.from(medicine.in_sectors).map((sector) => ({
@@ -40,14 +41,6 @@
 
 	function dispense(sector: number) {
 		medicinesPerSector[sector].forEach((med) => {
-			const req = {
-				...med,
-				in_sectors: med.in_sectors.filter((sec) => sec !== sector)
-			};
-			fetch('/private/api/medicines', {
-				method: 'PUT',
-				body: JSON.stringify(req)
-			});
 			const logReq = {
 				type: 'take',
 				medicine_name: med.name,
@@ -108,7 +101,10 @@
 	{/each}
 </div>
 <div class="flex flex-row gap-6 justify-center">
-	<button on:click={() => dispense(selectedSectorValue)} class="btn"> Take medications</button>
+	<form method="POST" action="?/fromMedBox" use:enhance>
+		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
+		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn">Take medications</button>
+	</form>
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button
 	>

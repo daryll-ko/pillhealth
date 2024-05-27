@@ -92,13 +92,12 @@ export async function getMedicines(supabase: SupabaseClient): Promise<Medicine[]
 	return data;
 }
 
-export async function addMedicine(medicine: Medicine, supabase: SupabaseClient) {
+export async function addMedicine(name: string, color: string, description: string, supabase: SupabaseClient) {
 	const { error } = await supabase.from('medicine').insert({
-		name: medicine.name,
-		color: medicine.color,
-		description: medicine.description,
-		user_id: medicine.user_id,
-		in_sectors: Array.from(medicine.in_sectors)
+		name,
+		color,
+		description,
+		in_sectors: [],
 	});
 
 	if (error) {
@@ -116,16 +115,14 @@ export async function removeMedicine(medicine_id: number, supabase: SupabaseClie
 	}
 }
 
-export async function editMedicine(medicine: Medicine, supabase: SupabaseClient) {
+export async function editMedicine(id: number, name: string, description: string, supabase: SupabaseClient) {
 	const { error } = await supabase
 		.from('medicine')
 		.update({
-			name: medicine.name,
-			description: medicine.description,
-			color: medicine.color,
-			in_sectors: medicine.in_sectors
+			name,
+			description,
 		})
-		.eq('id', medicine.id);
+		.eq('id', id);
 
 	if (error) {
 		console.error('Error updating medicine:', error);
@@ -265,7 +262,7 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 
 		if (await checkNoSetDispenses(supabase)) {
 			console.log('No more set dispenses!');
-			await createEmail(2, supabase, []);
+			// await createEmail(2, supabase, []);
 		}
 
 	}

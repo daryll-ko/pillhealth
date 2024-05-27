@@ -4,6 +4,7 @@
 	import type { Medicine } from '$lib/types';
 	import { randColor } from '$lib/utils';
 	import { Textfield } from 'svelte-mui';
+	import { enhance } from '$app/forms';
 
 	let selectedSectorValue = -1;
 	selectedSector.subscribe((val) => (selectedSectorValue = val));
@@ -18,19 +19,13 @@
 	$: addable = medicines.filter((med) => !med.in_sectors.includes(selectedSectorValue));
 
 	let toAdd: Medicine | null;
+	$: toAdd = null, medicines;
+
+	let medId: number;
+	$: medId = toAdd ? toAdd.id : 0;
 
 	function handleSubmit(sector: number) {
-		if (sector === -1) {
-			fetch('/private/api/medicines', { method: 'POST', body: JSON.stringify(result) });
-		} else if (toAdd) {
-			const medReq = {
-				...toAdd,
-				in_sectors: [...toAdd.in_sectors, sector]
-			};
-			fetch('/private/api/medicines', {
-				method: 'PUT',
-				body: JSON.stringify(medReq)
-			});
+		if (sector !== -1 && toAdd) {
 			const logReq = {
 				type: 'refill',
 				medicine_name: toAdd.name,
@@ -42,10 +37,13 @@
 				body: JSON.stringify(logReq)
 			});
 		}
-		dialogOpen.set(false);
+		// dialogOpen.set(false);
 	}
 
 	let dropdownOpen = false;
+
+	let proceed: boolean;
+	$: proceed = selectedSectorValue === -1 || toAdd !== null;
 </script>
 
 <div
@@ -61,16 +59,27 @@
 			>
 		</div>
 		<br />
-		<form on:submit|preventDefault={() => handleSubmit(selectedSectorValue)}>
+		<form method="POST" action="?/fromMedDialog" use:enhance={({formData}) => {
+			formData.append('name', name)
+			formData.append('description', description)
+			}}>
+			<input name="sector" bind:value={selectedSectorValue} type="hidden" />
+			<input name="proceed" bind:value={proceed} type="hidden" />
+			<input name="med_id" bind:value={medId} type="hidden" />
 			{#if selectedSectorValue === -1}
 				<div class="relative w-full bg-white">
-					<Textfield bind:value={name} autocomplete="off" type="" label="Name" required outlined />
+					<Textfield
+						bind:value={name}
+						autocomplete="off"
+						label="Name"
+						required
+						outlined
+					/>
 				</div>
 				<div class="relative w-full bg-white">
 					<Textfield
 						bind:value={description}
 						autocomplete="off"
-						type=""
 						label="Description"
 						required
 						outlined
@@ -78,15 +87,18 @@
 				</div>
 				<div class="flex flex-row items-center gap-3">
 					<p class="text-[#9f9f9f]">Color</p>
-					<input type="color" bind:value={color} />
+					<input name="color" type="color" bind:value={color} />
 				</div>
 				<br />
 				<div class="flex flex-row justify-center">
-					<button type="submit" class="btn">Submit</button>
+					<button on:click={() => handleSubmit(selectedSectorValue)} type="submit" class="btn"
+						>Submit</button
+					>
 				</div>
 			{:else}
 				<div class="flex flex-row items-center">
 					<Button
+						type="button"
 						class="flex flex-row items-center text-black gap-3 w-full border border-solid border-black/20 rounded-md py-2"
 					>
 						<span
@@ -112,7 +124,12 @@
 				</div>
 				<br />
 				<div class="flex flex-row justify-center">
-					<button type="submit" disabled={toAdd === null} class="btn">Add</button>
+					<button
+						on:click={() => handleSubmit(selectedSectorValue)}
+						type="submit"
+						disabled={toAdd === null}
+						class="btn">Add</button
+					>
 				</div>
 			{/if}
 		</form>

@@ -22,6 +22,7 @@
 			</p>
 		{:else}
 			<button
+				type="button"
 				disabled={editing}
 				on:click={handleClick}
 				class="py-1 group transition-all hover:scale-105 flex flex-row justify-center items-center gap-1 w-full disabled:hover:scale-100"

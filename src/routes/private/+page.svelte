@@ -3,24 +3,19 @@
 	import MedicineDialog from '$lib/components/MedicineDialog.svelte';
 	import MedicineBox from '$lib/components/MedicineBox.svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
-	import { onMount } from 'svelte';
-	import { invalidateAll } from '$app/navigation';
 
 	export let data;
+	export let form;
 
-	onMount(() => {
-		const interval = setInterval(() => {
-			invalidateAll();
-		}, 1000);
+	let medicines;
+	$: medicines = form?.medicines || data.medicines;
 
-		return () => {
-			clearInterval(interval);
-		};
-	});
+	let userData;
+	$: userData = form?.userData || data.userData;
 </script>
 
 {#if $dialogOpen}
-	<MedicineDialog medicines={data.medicines} />
+	<MedicineDialog medicines={medicines} />
 {/if}
 
 <div class="flex flex-col w-[80%] gap-12">
@@ -29,7 +24,7 @@
 		<p class="text-2xl">Consistency is key to better health.</p>
 	</div>
 	{#if data.user !== null}
-		<MedicineBox medicines={data.medicines} user={data.userData} />
+		<MedicineBox medicines={medicines} user={userData} />
 	{/if}
 </div>
-<Sidebar medicines={data.medicines} user={data.userData} />
+<Sidebar medicines={medicines} user={userData} />
