@@ -106,9 +106,9 @@ export async function createJob (date: Date, sector: number, supabase: SupabaseC
 			console.log(`Time to take ${medList}!`);
 			await clearCompartment(sector, supabase);
 			await createEmail(1, supabase, medList);
-			setTimeout(() => {
-				window.location.reload(); // Reload the page
-			}, 3000); 
+			// setTimeout(() => {
+			// 	window.location.reload(); // Reload the page
+			// }, 3000); 
 		}, // onTick
 	);
 	console.log("job's next date at", job.nextDate())
