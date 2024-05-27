@@ -20,6 +20,7 @@
 		"@smui/textfield": "^7.0.0",
 		"@supabase/supabase-js": "^2.43.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-node": "^5.0.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/cronitor": "^2.3.0",
