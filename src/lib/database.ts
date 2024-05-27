@@ -1,5 +1,8 @@
 import type { Log, Medicine, User } from './types';
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { createJob } from '../hooks.server';
+import { create } from 'domain';
+import { createEmail } from '../hooks.server';
 
 export async function setDispenseTime(sector: number, time: Date, supabase: SupabaseClient) {
 	const columnName = `sector_${sector + 1}`;
@@ -14,6 +17,9 @@ export async function setDispenseTime(sector: number, time: Date, supabase: Supa
 
 		const { error } = await supabase.from('user').update(updateData).eq('user_id', loggedInUID);
 
+		console.log('setDispenseTime');
+		createJob(time, sector, supabase);
+
 		if (error) {
 			console.error('Error updating dispense time:', error);
 			throw error;
@@ -22,6 +28,56 @@ export async function setDispenseTime(sector: number, time: Date, supabase: Supa
 		console.error('User is not logged in');
 		throw new Error('User is not logged in');
 	}
+}
+
+export async function checkNoSetDispenses(supabase: SupabaseClient): Promise<boolean> {
+	const { data, error } = await supabase
+		.from('user')
+		.select('sector_1, sector_2, sector_3, sector_4, sector_5, sector_6, sector_7, sector_8')
+		.single();
+
+	if (error) {
+		console.error('Error getting user:', error);
+		throw error;
+	}
+
+	if (!data) {
+		console.error('User not found');
+		throw new Error('User not found');
+	}
+
+	const sectors = [ 'sector_1', 'sector_2', 'sector_3', 'sector_4', 'sector_5', 'sector_6', 'sector_7', 'sector_8'];
+	for (const sector of sectors) {
+		if (data[sector]) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<String[]> {
+	const { data, error } = await supabase.from('medicine').select('name, in_sectors');
+
+	if (error) {
+		console.error('Error getting medicines:', error);
+		throw error;
+	}
+	if (!data) {
+		console.error('No medicines found');
+		throw new Error('No medicines found');
+	}
+	const medArray: String[] = [];
+
+	for (const medicine of data) {
+		const { name, in_sectors } = medicine;
+
+		if (in_sectors.includes(sector)) {
+			medArray.push(name);
+		}
+	}
+
+	return medArray;
 }
 
 export async function getMedicines(supabase: SupabaseClient): Promise<Medicine[]> {
@@ -174,6 +230,7 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 		console.error('No medicines found');
 		throw new Error('No medicines found');
 	}
+	
 	for (const medicine of data) {
 		const { id, in_sectors } = medicine;
 
@@ -191,8 +248,34 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 			// perform log ?
 		}
 	}
+	let loggedInUID: null | string = null;
+	const { data: authData } = await supabase.auth.getUser();
+	loggedInUID = authData.user?.id ?? null;
+
+	if (loggedInUID) {
+		const columnName = `sector_${sector + 1}`;
+		const updateData: { [key: string]: Date | null } = {};
+		updateData[columnName] = null;
+
+		const { error: clearError } = await supabase.from('user').update(updateData).eq('user_id', loggedInUID);
+		if (clearError) {
+				console.error('Error updating dispense time:', clearError);
+				throw clearError;
+			} 
+
+		if (await checkNoSetDispenses(supabase)) {
+			console.log('No more set dispenses!');
+			await createEmail(2, supabase, []);
+		}
+
+	}
+	else {
+		console.error('User is not logged in');
+		throw new Error('User is not logged in');
+	}
 	// console.log(`Compartment ${sector} cleared successfully.`);
 }
+
 
 export async function getLogs(supabase: SupabaseClient): Promise<Log[]> {
 	const { data, error } = await supabase.from('log').select();
@@ -242,26 +325,6 @@ export async function getUser(supabase: SupabaseClient): Promise<User> {
 		console.error('User not found');
 		throw new Error('User not found');
 	}
-	// console.log('getUser', data);
 
 	return data;
 }
-
-// mock database
-
-// import type { Database, Log, Medicine, User } from './types';
-// import { generateDatabase } from './utils';
-
-// const db: Database = generateDatabase();
-
-// export function getLogs(): Log[] {
-// 	return db.logs;
-// }
-
-// export function getMedicines(): Medicine[] {
-// 	return db.medicines;
-// }
-
-// export function getUsers(): User[] {
-// 	return db.users;
-// }

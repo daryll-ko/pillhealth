@@ -9,8 +9,20 @@
 		<div class="flex flex-col lg:flex-row justify-between gap-8">
 				<div class="w-full lg:w-5/12 flex flex-col justify-center">
 					<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">About Us</h1>
-					<p class="font-normal text-base leading-6 text-gray-600 dark:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from</p>
-				</div>
+					<p class="font-normal text-base leading-6 text-gray-600 dark:text-white text-justify">
+                                                PillHealth is an automated medicine box that aims to revolutionize
+                                                medication management. Say goodbye to missed doses and confusion -
+                                                PillHealth keeps you on track with timely visual and audio reminders and
+                                                convenient phone notifications. By automatically dispensing your
+                                                medication, PillHealth ensures every dose is ready when you need it. <br /><br />
+
+                                                Our intuitive web application also puts control right at your fingertips,
+                                                allowing you to customize settings and access comprehensive dosage
+                                                statistics seamlessly. <br /><br />
+
+                                                Experience a new era of healthcare management with PillHealth.
+                                        </p>
+                                </div>
 				<div class="w-full lg:w-8/12">
 					<img class="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-116.png" alt="A group of People" />
 				</div>
@@ -18,9 +30,20 @@
 
 		<div class="flex lg:flex-row flex-col justify-between gap-8 pt-12">
 			<div class="w-full lg:w-5/12 flex flex-col justify-center">
-				<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Our Story</h1>
-				<p class="font-normal text-base leading-6 text-gray-600 dark:text-white">
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God, and by this our present charter confirmed for us and our heirs forever that the English Church shall be free, and shall have her rights entire, and her liberties inviolate; and we will that it be thus observed; which is apparent from</p>
+				<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Vision & Mission</h1>
+				<p class="font-normal text-base leading-6 text-gray-600 dark:text-white text-justify">
+                                        PillHealth was founded in 2024 by a group of passionate Computer Science students
+                                        from the University of the Philippines - Diliman. Our team is dedicated to improving the
+                                        lives of individuals with chronic conditions by providing a simple and
+                                        effective solution to medication management. <br /><br />
+
+                                        We believe that healthcare should be accessible and convenient for everyone.
+                                        PillHealth is designed to empower patients to take control of their health
+                                        and live their best lives. <br /><br />
+
+                                        Our mission is to make medication management easy, efficient, and stress-free
+                                        for all. Join us on our journey to transform healthcare with PillHealth.
+                                </p>
 			</div>
 			<div class="w-full lg:w-8/12 lg:pt-8">
                 <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4  rounded-md">

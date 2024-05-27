@@ -84,51 +84,101 @@ const authGuard: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-// cron node
-import cron from 'node-cron';
 
-// cron.schedule('*/1 * * * *', async () => {  // every 1 minute
-// 	console.log('Sending Email');
-// 	try {
-// 		// const formData = await request.formData();
-// 		const email = "wtmaceda@up.edu.ph";
-// 		const subject = "Test subject";
-// 		const body = "this is a test email"
-// 		console.log(body);
-// 		let html = `<h2>Hi!</h2><pre>${body}</pre>`;
 
-// 		const message = {
-// 			from: GOOGLE_EMAIL,
-// 			to: email,
-// 			bcc: "jelamay.yap@gmail.com",
-// 			subject: subject,
-// 			text: body,
-// 			html: html,
-// 		};
+// Create a Map to store cron jobs with unique identifiers
+const cronJobs: Map<string, CronJob> = new Map();
 
-// 		const sendEmail = async (message) => {
-// 			await new Promise((resolve, reject) => {
-// 				transporter.sendMail(message, (err, info) => {
-// 					if (err) {
-// 						console.error(err);
-// 						reject(err);
-// 					} else {
-// 						resolve(info);
-// 					}
-// 				});
-// 			});
-// 		};
+import { CronJob } from 'cron';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import { getMedicinesFromSector } from '$lib/database';
+import { clearCompartment } from '$lib/database';
 
-// 		await sendEmail(message);
+export async function createJob (date: Date, sector: number, supabase: SupabaseClient) {
+	console.log(`Creating job for sector ${sector} at ${date}`);
+	if (cronJobs.has(`sector_${sector}`)) {
+		cronJobs.get(`sector_${sector}`).stop();
+	}
+	const job = new CronJob(
+		date, // cronTime
+		async function () {
+			const medList = await getMedicinesFromSector(sector, supabase);
+			console.log(`Time to take ${medList}!`);
+			await clearCompartment(sector, supabase);
+			await createEmail(1, supabase, medList);
+		}, // onTick
+	);
+	cronJobs.set(`sector_${sector}`, job);
+	job.start();
+	console.log('Cron jobs created', cronJobs);
+}
 
-// 		return {
-// 			success: "Email is sent",
-// 		};
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// });
 
-// console.log('Cron job started');
+
+export async function createEmail (type: number, supabase: SupabaseClient, medList: String[]) {
+	try {
+		const email = (await supabase.auth.getUser()).data.user?.email;
+
+		// switch case type 1 2 3
+		let subject = "";
+		let body = "";
+		switch (type) {
+			case 1:
+				subject = `[ALERT] Time to take your medicine!`;
+				body = `Here are the medicines you have to take: ${medList.join(', ')}`;
+				break;
+			case 2:
+				subject = "[REMINDER] No more set dispenses!";
+				body = "You have no more set dispenses! Please refill your compartments to continue receiving reminders.";
+				break;
+			default:
+				subject = "";
+				body = "";
+				break;
+		}
+
+
+
+		let html = `<h2>Hi!</h2><pre>${body}</pre>`;
+
+		const message = {
+			from: GOOGLE_EMAIL,
+			to: email,
+			subject: subject,
+			text: body,
+			html: html,
+		};
+
+		const sendEmail = async (message) => {
+			await new Promise((resolve, reject) => {
+				transporter.sendMail(message, (err, info) => {
+					if (err) {
+						console.error(err);
+						reject(err);
+					} else {
+						resolve(info);
+					}
+				});
+			});
+		};
+
+		await sendEmail(message);
+
+		return {
+			success: "Email is sent",
+		};
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+
+// const job = new CronJob(
+// 	'* * * * * *', // cronTime
+// 	function () {
+// 		console.log('You will see this message every second');
+// 	}, // onTick
+	
+// );
 
 export const handle: Handle = sequence(supabase, authGuard);

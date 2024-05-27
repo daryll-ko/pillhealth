@@ -49,6 +49,7 @@
 	"type": "module",
 	"dependencies": {
 		"@supabase/ssr": "^0.3.0",
+		"cron": "^3.1.7",
 		"cronitor": "^2.4.0",
 		"flowbite-svelte": "^0.46.1",
 		"node-cron": "^3.0.3",

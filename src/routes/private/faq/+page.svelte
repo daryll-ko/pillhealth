@@ -26,11 +26,11 @@
 						To refill the compartments, open the device and load the pills into the designated compartments you have indicated on the app according to your medication schedule.
 					</div>
 				</ExpansionPanel>
-			<ExpansionPanel name="What happens if I miss a dose?" bind:group on:change={onchage}>
+			<!-- <ExpansionPanel name="What happens if I miss a dose?" bind:group on:change={onchage}>
 					<div>
 						If you miss a dose, PillHealth will send repeated reminders until you take your medication. The device also logs missed doses, which you can review through the app. This information can be shared with your healthcare provider if needed.
 					</div>
-				</ExpansionPanel>
+				</ExpansionPanel> -->
 			<ExpansionPanel name="What do I place in the description?" bind:group on:change={onchage}>
 					<div>
 						You may customize the description according to your liking to serve as a reminder.

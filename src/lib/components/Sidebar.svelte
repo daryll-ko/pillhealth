@@ -38,12 +38,23 @@
 		user.sector_7,
 		user.sector_8
 	].map((timestamp) =>
-		timestamp ? new Date(timestamp) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+		timestamp ? new Date(timestamp) : null
 	);
+
 
 	let date = '';
 
+	function formatDateTime(datetime: Date) {
+    return `${datetime.getFullYear()}-${String(datetime.getMonth() + 1).padStart(2, '0')}-${String(datetime.getDate()).padStart(2, '0')}T${String(datetime.getHours()).padStart(2, '0')}:${String(datetime.getMinutes()).padStart(2, '0')}`;
+  }
+
 	function updateDate(sector: number, time: string) {
+
+		if (time === '') {
+			window.alert('Please select a date and time');
+			return;
+		}
+
 		const req = {
 			sector,
 			time
@@ -95,19 +106,30 @@
 
 <div class="absolute right-0 top-0 h-screen flex flex-col items-center gap-8 bg-theme p-8 w-64">
 	<div class="bg-[#333333] rounded-lg px-1 py-2 flex justify-center w-full">
-		<span class="text-4xl font-bold text-white">{curTime}</span>
+		<span class="text-3xl font-bold text-white">{curTime}</span>
 	</div>
 	<div>
 		<h1 class="text-white">
-			<p class="text-3xl font-bold">Medications</p>
-			<p>
-				{selectedSectorValue === -1 ? 'All medications' : `Sector ${selectedSectorValue + 1}`}
+			<p class="text-3xl font-bold">
+				{selectedSectorValue === -1 ? 'All Stored Medications' : `Medications in Sector ${selectedSectorValue + 1}`}
 			</p>
-			{#if selectedSectorValue !== -1}
-				<p>Due {timestamps[selectedSectorValue].toLocaleString()}</p>
-			{/if}
 		</h1>
 	</div>
+	{#if selectedSectorValue !== -1}
+		<div class="w-full gap-0 text-white mb-4">
+						<p>Due Date: <br /> {timestamps[selectedSectorValue] !== null ? timestamps[selectedSectorValue]?.toLocaleDateString() : "Not yet set"}
+						{timestamps[selectedSectorValue] !== null ? timestamps[selectedSectorValue]?.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit'}) : ''}</p>
+				<div class="flex flex-col items-center gap-2">
+					<input class="text-black rounded-md px-1 w-[100%] text-sm" type="datetime-local" bind:value={date} />
+					<button
+						on:click={() => updateDate(selectedSectorValue, date)}
+						class="rounded-full h-6 font-bold flex justify-center items-center hover:scale-110 text-white transition-all"
+						><span class="bg-yellow-500 pr-2 pl-2 rounded-full mt-2">Save time</span></button> 
+					
+				</div>
+		</div>
+	{/if}
+	
 	<div class="flex flex-row items-center text-white gap-2">
 		<button
 			on:click={() => dialogOpen.set(true)}
@@ -116,16 +138,6 @@
 		>
 		<p>Add Medication</p>
 	</div>
-	{#if selectedSectorValue !== -1}
-		<div class="flex flex-row items-center gap-2">
-			<button
-				on:click={() => updateDate(selectedSectorValue, date)}
-				class="bg-blue-400 rounded-full h-6 w-6 font-bold text-xl flex justify-center items-center hover:scale-110 text-white transition-all"
-				><span class="pb-1">~</span></button
-			>
-			<input class="text-black rounded-md px-1" type="datetime-local" bind:value={date} />
-		</div>
-	{/if}
 	<div class="flex flex-col gap-5 w-full overflow-y-scroll">
 		{#each medicinesToShow as medicine, i}
 			<div class="rounded-lg bg-white flex flex-col justify-center gap-2">

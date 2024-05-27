@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { selectedSector } from '$lib/stores';
 	import type { Medicine, User } from '$lib/types';
+	import { minimatch } from 'minimatch';
 
 	export let medicines: Medicine[];
 	export let user: User;
@@ -14,7 +15,7 @@
 		user.sector_6,
 		user.sector_7,
 		user.sector_8
-	].map((timestamp) => (timestamp ? new Date(timestamp) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)));
+	].map((timestamp) => (timestamp ? new Date(timestamp) : null ));
 
 	$: medicinesPerSector = medicines
 		.flatMap((medicine) =>
@@ -82,9 +83,9 @@
 						class={`flex flex-col items-center justify-center pb-1 ${i === selectedSectorValue ? 'bg-[#f0fff8]' : 'bg-white'}`}
 					>
 						<p class="text-lg -mb-1">
-							{timestamp ? timestamp.toLocaleString('default', { day: 'numeric' }) : ''}
+							{timestamp ? timestamp.toLocaleString('default', { day: 'numeric' }) : 'Day'}
 						</p>
-						<p>{timestamp ? timestamp.toLocaleString('default', { month: 'long' }) : ''}</p>
+						<p>{timestamp ? timestamp.toLocaleString('default', { month: 'long' }) : 'Month'}</p>
 					</div>
 				</div>
 				<div
@@ -92,7 +93,7 @@
 				>
 					<p>{timestamp ? timestamp.toLocaleString('default', { weekday: 'long' }) : ''}</p>
 					<p>
-						{timestamp ? timestamp.toLocaleString('default', { timeStyle: 'short' }) : 'set time'}
+						{@html timestamp ? timestamp.toLocaleString('default', { timeStyle: 'short' }) : 'Click to<br>set time'}
 					</p>
 				</div>
 			</div>
