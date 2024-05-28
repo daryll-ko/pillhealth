@@ -3,7 +3,6 @@ import { json } from '@sveltejs/kit';
 export async function POST({ request }) {
 	console.log("--- esp esp esp ---")
 	console.log()
-	console.log(request);
 	const body = await request.json();
 	console.log(body);
 	console.log()
