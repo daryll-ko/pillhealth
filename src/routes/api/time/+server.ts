@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
 
 export function GET() {
-	return json({date: new Date()});
+	return json({date: (new Date()).valueOf()});
 }
