@@ -74,16 +74,30 @@ export const actions: Actions = {
 	setTime: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 
-		const sector = Number(formData.get('sector')); 
-		const date = new Date(String(formData.get("date")));
+		const sector = Number(formData.get('sector'));
+		const date = new Date(String(formData.get('date')));
 
-		console.log("setTime gets", date);
+		console.log('setTime gets', date);
 
 		await db.setDispenseTime(sector, date, supabase);
 
 		return {
 			medicines: await db.getMedicines(supabase),
-			userData: await db.getUser(supabase),
+			userData: await db.getUser(supabase)
+		};
+	},
+	alarm: async ({ request, locals: { supabase } }) => {
+		const formData = await request.formData();
+
+		console.log(formData);
+
+		const alarm = Number(formData.get('alarm'));
+
+		await db.editAlarm(alarm, supabase);
+
+		return {
+			medicines: await db.getMedicines(supabase),
+			userData: await db.getUser(supabase)
 		};
 	}
 };

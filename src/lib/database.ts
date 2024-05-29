@@ -1,7 +1,6 @@
 import type { Log, Medicine, User } from './types';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { createJob } from '../hooks.server';
-import { create } from 'domain';
 import { createEmail } from '../hooks.server';
 
 export async function setDispenseTime(sector: number, time: Date, supabase: SupabaseClient) {
@@ -57,7 +56,7 @@ export async function checkNoSetDispenses(supabase: SupabaseClient): Promise<boo
 	return true;
 }
 
-export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<String[]> {
+export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<string[]> {
 	const { data, error } = await supabase.from('medicine').select('name, in_sectors');
 
 	if (error) {
@@ -68,7 +67,7 @@ export async function getMedicinesFromSector(sector: number, supabase: SupabaseC
 		console.error('No medicines found');
 		throw new Error('No medicines found');
 	}
-	const medArray: String[] = [];
+	const medArray: string[] = [];
 
 	for (const medicine of data) {
 		const { name, in_sectors } = medicine;
@@ -129,6 +128,33 @@ export async function editMedicine(id: number, name: string, description: string
 		console.error('Error updating medicine:', error);
 		throw error;
 	}
+}
+
+export async function editAlarm(
+	num: number,
+	supabase: SupabaseClient
+) {
+	let loggedInUID: null | string = null;
+	const { data: authData } = await supabase.auth.getUser();
+	loggedInUID = authData.user?.id ?? null;
+
+	if (loggedInUID) {
+	const { error } = await supabase
+		.from('user')
+		.update({
+			alarm: num,
+		})
+		.eq('user_id', loggedInUID);
+
+		if (error) {
+			console.error('Error updating alarm:', error);
+			throw error;
+		}
+	} else {
+		console.error('User is not logged in');
+		throw new Error('User is not logged in');
+	}
+
 }
 
 export async function addPillToSector(

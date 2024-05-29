@@ -20,11 +20,11 @@
 <div class="flex flex-col w-[80%] gap-12 p-12">
 	<h1 class="text-4xl font-bold">History</h1>
 	<Table hoverable={true} divClass="bg-black/10 rounded-md">
-		<TableHead theadClass="">
-			<TableHeadCell>Date</TableHeadCell>
-			<TableHeadCell>Type</TableHeadCell>
-			<TableHeadCell>Medicine Name</TableHeadCell>
-			<TableHeadCell>Sector</TableHeadCell>
+		<TableHead>
+			<TableHeadCell class="text-center">Date</TableHeadCell>
+			<TableHeadCell class="text-center">Type</TableHeadCell>
+			<TableHeadCell class="text-center">Medicine Name</TableHeadCell>
+			<TableHeadCell class="text-center">Sector</TableHeadCell>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y text-center">
 			{#each logsToShow as log}

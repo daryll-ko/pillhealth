@@ -2,9 +2,7 @@
 	import { ExpansionPanel } from 'svelte-mui';
 	let group = '';
 
-	const onchage = ({ detail }) => {
-		// console.log(detail.expanded ? 'open' : 'close', detail.name);
-	};
+	const onchage = ({}) => {};
 </script>
 
 <div
@@ -22,7 +20,10 @@
 					--focus-color="#000000"
 				>
 					<div>
-						Click the 'See all Medications' button. On the side bar click '+ Add Medication' and input your desired medicine name and description in the popup and hit 'Save'. Selecting a sector and clicking '+ Add Medication' will now allow you to select one of your medications to add to the sector.
+						Click the 'See all Medications' button. On the side bar click '+ Add Medication' and
+						input your desired medicine name and description in the popup and hit 'Save'. Selecting
+						a sector and clicking '+ Add Medication' will now allow you to select one of your
+						medications to add to the sector.
 					</div>
 				</ExpansionPanel>
 				<ExpansionPanel
