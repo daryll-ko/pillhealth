@@ -8,8 +8,8 @@
 	<div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
 		<div class="flex flex-col lg:flex-row justify-between gap-8">
 				<div class="w-full lg:w-5/12 flex flex-col justify-center">
-					<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">About Us</h1>
-					<p class="font-normal text-base leading-6 text-gray-600 dark:text-white text-justify">
+					<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
+					<p class="font-normal text-base leading-6 text-gray-600 text-justify">
                                                 PillHealth is an automated medicine box that aims to revolutionize
                                                 medication management. Say goodbye to missed doses and confusion -
                                                 PillHealth keeps you on track with timely visual and audio reminders and
@@ -30,8 +30,8 @@
 
 		<div class="flex lg:flex-row flex-col justify-between gap-8 pt-12">
 			<div class="w-full lg:w-5/12 flex flex-col justify-center">
-				<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">Vision & Mission</h1>
-				<p class="font-normal text-base leading-6 text-gray-600 dark:text-white text-justify">
+				<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">Vision & Mission</h1>
+				<p class="font-normal text-base leading-6 text-gray-600 text-justify">
                                         PillHealth was founded in 2024 by a group of passionate Computer Science students
                                         from the University of the Philippines - Diliman. Our team is dedicated to improving the
                                         lives of individuals with chronic conditions by providing a simple and
@@ -49,29 +49,29 @@
                 <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4  rounded-md">
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                                     <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png" alt="Alexa featured Image" />
-                                    <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Pauline</p>
+                                    <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Pauline</p>
                     </div>
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                                     <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png" alt="Olivia featured Image" />
-                                    <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Immanuel</p>
+                                    <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Immanuel</p>
                     </div>
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                                     <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Liam featued Image" />
-                                    <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Daryll</p>
+                                    <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Daryll</p>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                             <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png" alt="Alexa featured Image" />
-                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Westin</p>
+                            <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Westin</p>
                     </div>
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                             <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png" alt="Olivia featured Image" />
-                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Rohan</p>
+                            <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Rohan</p>
                     </div>
                     <div class="p-4 pb-6 flex justify-center flex-col items-center">
                             <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Liam featued Image" />
-                            <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Jela</p>
+                            <p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Jela</p>
                     </div>
                 </div>
 			</div>
