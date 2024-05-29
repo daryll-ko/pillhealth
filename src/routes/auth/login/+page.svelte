@@ -16,14 +16,7 @@
 						name="email"
 						type="email"
 					/> -->
-					<Textfield
-						autocomplete="off"
-						type="email"
-						label="Email"
-						name="email"
-						required
-						outlined
-					/>
+					<Textfield autocomplete="off" type="email" label="Email" name="email" required outlined />
 				</div>
 				<div class="relative w-full bg-white">
 					<!-- <span

@@ -15,7 +15,7 @@
 </script>
 
 {#if $dialogOpen}
-	<MedicineDialog medicines={medicines} />
+	<MedicineDialog {medicines} />
 {/if}
 
 <div class="flex flex-col w-[80%] gap-12">
@@ -24,7 +24,7 @@
 		<p class="text-2xl">Consistency is key to better health.</p>
 	</div>
 	{#if data.user !== null}
-		<MedicineBox medicines={medicines} user={userData} />
+		<MedicineBox {medicines} user={userData} />
 	{/if}
 </div>
-<Sidebar medicines={medicines} user={userData} />
+<Sidebar {medicines} user={userData} />

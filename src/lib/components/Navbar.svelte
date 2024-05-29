@@ -46,8 +46,7 @@
 				on:click={() => {
 					alarm = 1;
 					dropdownOpen = false;
-				}}
-				><p class={`${alarm === 1 ? 'text-theme' : ''}`}>Green Flash</p></DropdownItem
+				}}><p class={`${alarm === 1 ? 'text-theme' : ''}`}>Green Flash</p></DropdownItem
 			>
 			<DropdownItem
 				on:click={() => {

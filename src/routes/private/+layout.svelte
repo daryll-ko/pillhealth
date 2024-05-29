@@ -12,7 +12,7 @@
 </header>
 <main>
 	<div class="h-screen">
-		<Navbar {data} userData={userData} />
+		<Navbar {data} {userData} />
 		<slot />
 	</div>
 </main>

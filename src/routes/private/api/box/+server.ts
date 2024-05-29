@@ -12,11 +12,13 @@ export async function GET({ locals: { supabase } }) {
 		user.sector_5,
 		user.sector_6,
 		user.sector_7,
-		user.sector_8,
-	].map((timestamp, index) => ({
-		date: timestamp ? new Date(timestamp).valueOf() : 0,
-		index,
-	})).sort((a, b) => a.date - b.date);
+		user.sector_8
+	]
+		.map((timestamp, index) => ({
+			date: timestamp ? new Date(timestamp).valueOf() : 0,
+			index
+		}))
+		.sort((a, b) => a.date - b.date);
 
 	return json(timestamps);
 }

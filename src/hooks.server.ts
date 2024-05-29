@@ -6,8 +6,8 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 
-import { GOOGLE_EMAIL } from "$env/static/private";
-import transporter from "$lib/emailSetup.server.js";
+import { GOOGLE_EMAIL } from '$env/static/private';
+import transporter from '$lib/emailSetup.server.js';
 
 const supabase: Handle = async ({ event, resolve }) => {
 	/**
@@ -84,8 +84,6 @@ const authGuard: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-
-
 // Create a Map to store cron jobs with unique identifiers
 const cronJobs: Map<string, CronJob> = new Map();
 
@@ -94,7 +92,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { getMedicinesFromSector } from '$lib/database';
 import { clearCompartment } from '$lib/database';
 
-export async function createJob (date: Date, sector: number, supabase: SupabaseClient) {
+export async function createJob(date: Date, sector: number, supabase: SupabaseClient) {
 	console.log(`Creating job for sector ${sector} at ${date}`);
 	if (cronJobs.has(`sector_${sector}`)) {
 		cronJobs.get(`sector_${sector}`).stop();
@@ -108,40 +106,37 @@ export async function createJob (date: Date, sector: number, supabase: SupabaseC
 			await createEmail(1, supabase, medList);
 			// setTimeout(() => {
 			// 	window.location.reload(); // Reload the page
-			// }, 3000); 
-		}, // onTick
+			// }, 3000);
+		} // onTick
 	);
-	console.log("job's next date at", job.nextDate())
+	console.log("job's next date at", job.nextDate());
 	cronJobs.set(`sector_${sector}`, job);
 	job.start();
 	console.log('Cron jobs created', cronJobs);
 }
 
-
-
-export async function createEmail (type: number, supabase: SupabaseClient, medList: String[]) {
+export async function createEmail(type: number, supabase: SupabaseClient, medList: String[]) {
 	try {
 		const email = (await supabase.auth.getUser()).data.user?.email;
 
 		// switch case type 1 2 3
-		let subject = "";
-		let body = "";
+		let subject = '';
+		let body = '';
 		switch (type) {
 			case 1:
 				subject = `[ALERT] Time to take your medicine!`;
 				body = `Here are the medicines you have to take: ${medList.join(', ')}`;
 				break;
 			case 2:
-				subject = "[REMINDER] No more set dispenses!";
-				body = "You have no more set dispenses! Please refill your compartments to continue receiving reminders.";
+				subject = '[REMINDER] No more set dispenses!';
+				body =
+					'You have no more set dispenses! Please refill your compartments to continue receiving reminders.';
 				break;
 			default:
-				subject = "";
-				body = "";
+				subject = '';
+				body = '';
 				break;
 		}
-
-
 
 		let html = `<h2>Hi!</h2><pre>${body}</pre>`;
 
@@ -150,7 +145,7 @@ export async function createEmail (type: number, supabase: SupabaseClient, medLi
 			to: email,
 			subject: subject,
 			text: body,
-			html: html,
+			html: html
 		};
 
 		const sendEmail = async (message) => {
@@ -169,20 +164,19 @@ export async function createEmail (type: number, supabase: SupabaseClient, medLi
 		await sendEmail(message);
 
 		return {
-			success: "Email is sent",
+			success: 'Email is sent'
 		};
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-
 // const job = new CronJob(
 // 	'* * * * * *', // cronTime
 // 	function () {
 // 		console.log('You will see this message every second');
 // 	}, // onTick
-	
+
 // );
 
 export const handle: Handle = sequence(supabase, authGuard);

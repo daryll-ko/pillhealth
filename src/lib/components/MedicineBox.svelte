@@ -15,7 +15,7 @@
 		user.sector_6,
 		user.sector_7,
 		user.sector_8
-	].map((timestamp) => (timestamp ? new Date(timestamp) : null ));
+	].map((timestamp) => (timestamp ? new Date(timestamp) : null));
 
 	let medicinesPerSector: Medicine[][];
 	$: medicinesPerSector = medicines
@@ -86,7 +86,9 @@
 				>
 					<p>{timestamp ? timestamp.toLocaleString('default', { weekday: 'long' }) : ''}</p>
 					<p>
-						{@html timestamp ? timestamp.toLocaleString('default', { timeStyle: 'short' }) : 'Click to<br>set time'}
+						{@html timestamp
+							? timestamp.toLocaleString('default', { timeStyle: 'short' })
+							: 'Click to<br>set time'}
 					</p>
 				</div>
 			</div>
@@ -103,7 +105,9 @@
 <div class="flex flex-row gap-6 justify-center">
 	<form method="POST" action="?/fromMedBox" use:enhance>
 		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
-		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn">Take medications</button>
+		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn"
+			>Take medications</button
+		>
 	</form>
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button
