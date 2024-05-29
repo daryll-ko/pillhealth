@@ -263,7 +263,7 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 
 		if (await checkNoSetDispenses(supabase)) {
 			console.log('No more set dispenses!');
-			// await createEmail(2, supabase, []);
+			await createEmail(2, supabase, []);
 		}
 
 	}
