@@ -1,5 +1,10 @@
 import { GOOGLE_EMAIL } from "$env/static/private";
 import transporter from "$lib/emailSetup.server.js";
+import { redirect } from "@sveltejs/kit";
+
+export function load() {
+		redirect(307, '/auth/login');
+}
 
 export const actions = {
     default: async ({ request }) => {
