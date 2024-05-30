@@ -5,6 +5,7 @@ export interface Log {
 	sector: number;
 	user_id: string;
 	time_taken: Date | null;
+	e_time_taken?: number;
 }
 
 export interface Medicine {

@@ -88,9 +88,7 @@
 				</div>
 				<br />
 				<div class="flex flex-row justify-center">
-					<button type="submit" class="btn"
-						>Submit</button
-					>
+					<button type="submit" class="btn">Submit</button>
 					<!-- on:click={() => handleSubmit(selectedSectorValue)} -->
 				</div>
 			{:else}

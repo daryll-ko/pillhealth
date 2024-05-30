@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		Table,
 		TableBody,
@@ -9,12 +9,39 @@
 		Checkbox,
 		TableSearch
 	} from 'flowbite-svelte';
+	import { type Log } from '$lib/types';
+	import { getLogger } from 'nodemailer/lib/shared/index.js';
 
 	export let data;
 
 	$: ({ logs } = data);
 
-	$: logsToShow = logs.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+	// a is from software, b is from hardware
+	function closeEnough(a: Log, b: Log) {
+		return (
+			(b.medicine_name == null || b.medicine_name === '') &&
+			a.sector === b.sector &&
+			Math.abs(a.timestamp.getTime() - b.timestamp.getTime()) <= 90 * 1000
+		);
+	}
+
+	$: logsToShow = logs
+		.filter((log) => log.medicine_name)
+		.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
+		.map((log) => {
+			if (logs.some((other) => closeEnough(log, other))) {
+				const other = logs.filter((l) => closeEnough(log, l))[0];
+				if (other) {
+					console.log(log.timestamp, other.timestamp);
+					return {
+						...log,
+						time_taken: other.timestamp
+					};
+				}
+			} else {
+				return log;
+			}
+		});
 </script>
 
 <div class="flex flex-col gap-12 p-12">
@@ -28,17 +55,21 @@
 		</TableHead>
 		<TableBody tableBodyClass="divide-y text-center">
 			{#each logsToShow as log}
-				<TableBodyRow>
-					<TableBodyCell tdClass="py-4"
-						><span class="text-black">{new Date(log.timestamp).toLocaleString()}</span
-						></TableBodyCell
-					>
-					<TableBodyCell tdClass="py-4"
-						><span class="text-black">{log.time_taken?.getTime() !== 0 ? log.time_taken?.toLocaleString() : 'NOT TAKEN'}</span
-						></TableBodyCell>
-					<TableBodyCell><span class="text-black">{log.medicine_name}</span></TableBodyCell>
-					<TableBodyCell><span class="text-black">{log.sector + 1}</span></TableBodyCell>
-				</TableBodyRow>
+				{#if log}
+					<TableBodyRow>
+						<TableBodyCell tdClass="py-4"
+							><span class="text-black">{new Date(log.timestamp).toLocaleString()}</span
+							></TableBodyCell
+						>
+						<TableBodyCell tdClass="py-4"
+							><span class="text-black"
+								>{log.time_taken ? new Date(log.time_taken).toLocaleString() : 'NOT TAKEN'}</span
+							></TableBodyCell
+						>
+						<TableBodyCell><span class="text-black">{log.medicine_name}</span></TableBodyCell>
+						<TableBodyCell><span class="text-black">{log.sector + 1}</span></TableBodyCell>
+					</TableBodyRow>
+				{/if}
 			{/each}
 		</TableBody>
 	</Table>

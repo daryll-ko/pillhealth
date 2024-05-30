@@ -102,23 +102,32 @@ export async function createJob(date: Date, sector: number, supabase: SupabaseCl
 		async function () {
 			const medList = await getMedicinesFromSector(sector, supabase);
 			await clearCompartment(sector, supabase);
-	
+
 			let loggedInUID: null | string = null;
 			const { data: authData } = await supabase.auth.getUser();
 			loggedInUID = authData.user?.id ?? null;
 
 			if (loggedInUID) {
-			await createEmail(1, supabase, medList.map(med => med.name));
-			for (const med of medList) {
-				await addLog(
-						{timestamp: new Date(),
-						time_taken: null,
-						medicine_name: med.name,
-						medicine_description: med.description,
-						sector: sector,
-						user_id: loggedInUID }, supabase)
-			}}
-		}, // onTick
+				await createEmail(
+					1,
+					supabase,
+					medList.map((med) => med.name)
+				);
+				for (const med of medList) {
+					await addLog(
+						{
+							timestamp: new Date(),
+							time_taken: null,
+							medicine_name: med.name,
+							medicine_description: med.description,
+							sector: sector,
+							user_id: loggedInUID
+						},
+						supabase
+					);
+				}
+			}
+		} // onTick
 	);
 	console.log("job's next date at", job.nextDate());
 	cronJobs.set(`sector_${sector}`, job);

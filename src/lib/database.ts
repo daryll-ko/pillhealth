@@ -65,7 +65,10 @@ export async function checkNoSetDispenses(supabase: SupabaseClient): Promise<boo
 	return true;
 }
 
-export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<Medicine[]> {
+export async function getMedicinesFromSector(
+	sector: number,
+	supabase: SupabaseClient
+): Promise<Medicine[]> {
 	const { data, error } = await supabase.from('medicine').select();
 
 	if (error) {
@@ -79,7 +82,6 @@ export async function getMedicinesFromSector(sector: number, supabase: SupabaseC
 	const medArray: Medicine[] = [];
 
 	for (const medicine of data) {
-
 		if (medicine.in_sectors.includes(sector)) {
 			medArray.push(medicine);
 		}
@@ -328,12 +330,13 @@ export async function getLogs(supabase: SupabaseClient): Promise<Log[]> {
 	const res: Log[] = data.map((entry) => ({
 		timestamp: new Date(entry.timestamp),
 		time_taken: entry.time_taken ? new Date(entry.time_taken) : null,
+		// e_time_taken: Number(entry.e_time_taken),
 		medicine_name: entry.medicine_name,
 		medicine_description: entry.medicine_description,
 		sector: Number(entry.sector),
 		user_id: entry.user_id
 	}));
-	console.log("getLogs gets", res);
+	console.log('getLogs gets', res);
 	return res;
 }
 
