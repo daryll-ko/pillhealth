@@ -34,7 +34,7 @@
 						></TableBodyCell
 					>
 					<TableBodyCell tdClass="py-4"
-						><span class="text-black">{log.time_taken ? new Date(log.time_taken).toLocaleString() : 'NOT TAKEN'}</span
+						><span class="text-black">{log.time_taken?.getTime() !== 0 ? log.time_taken?.toLocaleString() : 'NOT TAKEN'}</span
 						></TableBodyCell>
 					<TableBodyCell><span class="text-black">{log.medicine_name}</span></TableBodyCell>
 					<TableBodyCell><span class="text-black">{log.sector + 1}</span></TableBodyCell>
