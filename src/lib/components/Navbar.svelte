@@ -66,7 +66,7 @@
 			<button
 				disabled={dropdownOpen || alarm === userData.alarm}
 				type="submit"
-				class="-z-10 transition-all hover:scale-105 disabled:hover:scale-100 px-2 py-1 rounded-md text-sm bg-gray-200 disabled:text-black/20 disabled:bg-gray-200/20"
+				class="transition-all hover:scale-105 disabled:hover:scale-100 px-2 py-1 rounded-md text-sm bg-gray-200 disabled:text-black/20 disabled:bg-gray-200/20"
 				>Update</button
 			>
 		</form>
