@@ -87,11 +87,17 @@
 
 <p class="absolute h-12 w-12 top-0 right-0 z-40 mt-5 mr-5 xl:hidden">
 	{#if open}
-		<button class="h-12 w-12 bg-white rounded-full p-1" on:click={() => (open = false)}>
+		<button
+			class="h-12 w-12 flex justify-center items-center bg-white rounded-full p-1"
+			on:click={() => (open = false)}
+		>
 			<CloseOutline />
 		</button>
 	{:else}
-		<button class="h-12 w-12 bg-white rounded-full p-1" on:click={() => (open = true)}>
+		<button
+			class="h-12 w-12 flex justify-center items-center bg-white rounded-full p-1"
+			on:click={() => (open = true)}
+		>
 			<BarsOutline />
 		</button>
 	{/if}
