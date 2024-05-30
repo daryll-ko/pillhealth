@@ -39,7 +39,7 @@
 					};
 				}
 			} else {
-				return log;
+				return { ...log, time_taken: new Date(0) };
 			}
 		});
 </script>
@@ -61,11 +61,15 @@
 							><span class="text-black">{new Date(log.timestamp).toLocaleString()}</span
 							></TableBodyCell
 						>
-						<TableBodyCell tdClass="py-4"
-							><span class="text-black"
-								>{log.time_taken ? new Date(log.time_taken).toLocaleString() : 'NOT TAKEN'}</span
-							></TableBodyCell
-						>
+						<TableBodyCell tdClass="py-4">
+							{#if log.time_taken}
+								<span class="text-black">
+									{log.time_taken.getTime() > 0
+										? new Date(log.time_taken).toLocaleString()
+										: 'NOT TAKEN'}
+								</span>
+							{/if}
+						</TableBodyCell>
 						<TableBodyCell><span class="text-black">{log.medicine_name}</span></TableBodyCell>
 						<TableBodyCell><span class="text-black">{log.sector + 1}</span></TableBodyCell>
 					</TableBodyRow>
