@@ -42,7 +42,6 @@
 	function dispense(sector: number) {
 		medicinesPerSector[sector].forEach((med) => {
 			const logReq = {
-				type: 'take',
 				medicine_name: med.name,
 				medicine_description: med.description,
 				sector
@@ -103,7 +102,8 @@
 <div class="flex flex-row gap-6 justify-center">
 	<form method="POST" action="?/fromMedBox" use:enhance>
 		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
-		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn">Take medications</button>
+		<button  type="submit" class="btn">Take medications</button> 
+		<!-- on:click={() => dispense(selectedSectorValue)} -->
 	</form>
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button

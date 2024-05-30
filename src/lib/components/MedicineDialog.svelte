@@ -25,18 +25,17 @@
 	$: medId = toAdd ? toAdd.id : 0;
 
 	function handleSubmit(sector: number) {
-		if (sector !== -1 && toAdd) {
-			const logReq = {
-				type: 'refill',
-				medicine_name: toAdd.name,
-				medicine_description: toAdd.description,
-				sector
-			};
-			fetch('/private/api/logs', {
-				method: 'POST',
-				body: JSON.stringify(logReq)
-			});
-		}
+		// if (sector !== -1 && toAdd) {
+		// 	const logReq = {
+		// 		medicine_name: toAdd.name,
+		// 		medicine_description: toAdd.description,
+		// 		sector
+		// 	};
+		// 	fetch('/private/api/logs', {
+		// 		method: 'POST',
+		// 		body: JSON.stringify(logReq)
+		// 	});
+		// }
 		// dialogOpen.set(false);
 	}
 
@@ -91,9 +90,10 @@
 				</div>
 				<br />
 				<div class="flex flex-row justify-center">
-					<button on:click={() => handleSubmit(selectedSectorValue)} type="submit" class="btn"
+					<button type="submit" class="btn"
 						>Submit</button
 					>
+					<!-- on:click={() => handleSubmit(selectedSectorValue)} -->
 				</div>
 			{:else}
 				<div class="flex flex-row items-center">

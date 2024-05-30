@@ -1,10 +1,10 @@
 export interface Log {
 	timestamp: Date;
-	type: 'dispense' | 'take' | 'refill';
 	medicine_name: string;
 	medicine_description: string;
 	sector: number;
 	user_id: string;
+	time_taken: Date | null;
 }
 
 export interface Medicine {

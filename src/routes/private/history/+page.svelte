@@ -21,8 +21,8 @@
 	<h1 class="text-4xl font-bold">History</h1>
 	<Table hoverable={true} divClass="bg-black/10 rounded-md">
 		<TableHead theadClass="">
-			<TableHeadCell>Date</TableHeadCell>
-			<TableHeadCell>Type</TableHeadCell>
+			<TableHeadCell>Time Dispensed</TableHeadCell>
+			<TableHeadCell>Time Taken</TableHeadCell>
 			<TableHeadCell>Medicine Name</TableHeadCell>
 			<TableHeadCell>Sector</TableHeadCell>
 		</TableHead>
@@ -33,7 +33,9 @@
 						><span class="text-black">{new Date(log.timestamp).toLocaleString()}</span
 						></TableBodyCell
 					>
-					<TableBodyCell><span class="text-black">{log.type}</span></TableBodyCell>
+					<TableBodyCell tdClass="py-4"
+						><span class="text-black">{log.time_taken ? new Date(log.time_taken).toLocaleString() : 'NOT TAKEN'}</span
+						></TableBodyCell>
 					<TableBodyCell><span class="text-black">{log.medicine_name}</span></TableBodyCell>
 					<TableBodyCell><span class="text-black">{log.sector + 1}</span></TableBodyCell>
 				</TableBodyRow>

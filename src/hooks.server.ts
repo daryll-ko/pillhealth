@@ -92,7 +92,7 @@ const cronJobs: Map<string, CronJob> = new Map();
 import { CronJob } from 'cron';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getMedicinesFromSector } from '$lib/database';
-import { clearCompartment } from '$lib/database';
+import { clearCompartment, addLog } from '$lib/database';
 
 export async function createJob (date: Date, sector: number, supabase: SupabaseClient) {
 	console.log(`Creating job for sector ${sector} at ${date}`);
@@ -103,12 +103,23 @@ export async function createJob (date: Date, sector: number, supabase: SupabaseC
 		date, // cronTime
 		async function () {
 			const medList = await getMedicinesFromSector(sector, supabase);
-			console.log(`Time to take ${medList}!`);
 			await clearCompartment(sector, supabase);
-			await createEmail(1, supabase, medList);
-			// setTimeout(() => {
-			// 	window.location.reload(); // Reload the page
-			// }, 3000); 
+	
+			let loggedInUID: null | string = null;
+			const { data: authData } = await supabase.auth.getUser();
+			loggedInUID = authData.user?.id ?? null;
+
+			if (loggedInUID) {
+			await createEmail(1, supabase, medList.map(med => med.name));
+			for (const med of medList) {
+				await addLog(
+						{timestamp: new Date(),
+						time_taken: null,
+						medicine_name: med.name,
+						medicine_description: med.description,
+						sector: sector,
+						user_id: loggedInUID }, supabase)
+			}}
 		}, // onTick
 	);
 	console.log("job's next date at", job.nextDate())

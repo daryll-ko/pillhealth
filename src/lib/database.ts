@@ -57,8 +57,8 @@ export async function checkNoSetDispenses(supabase: SupabaseClient): Promise<boo
 	return true;
 }
 
-export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<String[]> {
-	const { data, error } = await supabase.from('medicine').select('name, in_sectors');
+export async function getMedicinesFromSector(sector: number, supabase: SupabaseClient): Promise<Medicine[]> {
+	const { data, error } = await supabase.from('medicine').select();
 
 	if (error) {
 		console.error('Error getting medicines:', error);
@@ -68,13 +68,12 @@ export async function getMedicinesFromSector(sector: number, supabase: SupabaseC
 		console.error('No medicines found');
 		throw new Error('No medicines found');
 	}
-	const medArray: String[] = [];
+	const medArray: Medicine[] = [];
 
 	for (const medicine of data) {
-		const { name, in_sectors } = medicine;
 
-		if (in_sectors.includes(sector)) {
-			medArray.push(name);
+		if (medicine.in_sectors.includes(sector)) {
+			medArray.push(medicine);
 		}
 	}
 
@@ -283,22 +282,23 @@ export async function getLogs(supabase: SupabaseClient): Promise<Log[]> {
 		throw error;
 	}
 
+	console.log('getLogs', data);
+
 	const res: Log[] = data.map((entry) => ({
 		timestamp: new Date(entry.timestamp),
-		type: entry.type,
+		time_taken: entry.time_taken ? new Date(entry.time_taken) : null,
 		medicine_name: entry.medicine_name,
 		medicine_description: entry.medicine_description,
 		sector: Number(entry.sector),
 		user_id: entry.user_id
 	}));
-
+	console.log("getLogs gets", res);
 	return res;
 }
 
 export async function addLog(log: Log, supabase: SupabaseClient) {
 	const { error } = await supabase.from('log').insert({
 		timestamp: log.timestamp,
-		type: log.type,
 		medicine_name: log.medicine_name,
 		medicine_description: log.medicine_description,
 		sector: log.sector,

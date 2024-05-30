@@ -6,7 +6,7 @@ export function GET({ locals: { supabase } }) {
 }
 
 export async function POST({ request, locals: { supabase } }) {
-	const { type, medicine_name, medicine_description, sector } = await request.json();
+	const { medicine_name, medicine_description, sector } = await request.json();
 	const { data } = await supabase.auth.getUser();
 
 	const timestamp = new Date();
@@ -15,7 +15,7 @@ export async function POST({ request, locals: { supabase } }) {
 		await db.addLog(
 			{
 				timestamp,
-				type,
+				time_taken: null,
 				medicine_name,
 				medicine_description,
 				sector,
