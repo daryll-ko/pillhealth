@@ -103,12 +103,12 @@
 	{/each}
 </div>
 <div class="flex flex-row gap-6 justify-center pb-8">
-	<form method="POST" action="?/fromMedBox" use:enhance>
+	<!-- <form method="POST" action="?/fromMedBox" use:enhance>
 		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
 		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn"
 			>Take medications</button
 		>
-	</form>
+	</form> -->
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button
 	>
