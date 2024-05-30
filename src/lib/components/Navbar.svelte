@@ -3,6 +3,7 @@
 	import logo from '$lib/assets/logo.png';
 	import { enhance } from '$app/forms';
 	import { Button, Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { page } from '$app/stores';
 
 	export let data;
 
@@ -20,6 +21,9 @@
 	let alarm: number = userData.alarm;
 	let dropdownOpen = false;
 	let activeClass = 'text-green-200';
+
+	let inRoot = false;
+	$: inRoot = $page.url.pathname === '/private';
 </script>
 
 <div
@@ -64,9 +68,9 @@
 			</Dropdown>
 			<input type="hidden" name="alarm" bind:value={alarm} />
 			<button
-				disabled={dropdownOpen || alarm === userData.alarm}
+				disabled={!inRoot || dropdownOpen || alarm === userData.alarm}
 				type="submit"
-				class="transition-all hover:scale-105 disabled:hover:scale-100 px-2 py-1 rounded-md text-sm bg-gray-200 disabled:text-black/20 disabled:bg-gray-200/20"
+				class="transition-all px-2 py-1 rounded-md text-sm bg-gray-200 disabled:text-black/20 disabled:bg-gray-200/20"
 				>Update</button
 			>
 		</form>
