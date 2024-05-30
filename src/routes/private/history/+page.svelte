@@ -17,7 +17,7 @@
 	$: logsToShow = logs.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
 </script>
 
-<div class="flex flex-col w-[80%] gap-12 p-12">
+<div class="flex flex-col gap-12 p-12">
 	<h1 class="text-4xl font-bold">History</h1>
 	<Table hoverable={true} divClass="bg-black/10 rounded-md">
 		<TableHead>

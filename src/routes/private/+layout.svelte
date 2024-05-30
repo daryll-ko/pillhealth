@@ -11,7 +11,7 @@
 	<title>PillHealth</title>
 </header>
 <main>
-	<div class="h-screen">
+	<div>
 		<Navbar {data} {userData} />
 		<slot />
 	</div>

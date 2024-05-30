@@ -2,9 +2,15 @@
 	import { selectedSector, dialogOpen } from '$lib/stores';
 	import type { Medicine, User } from '$lib/types';
 
-	import { CheckOutline, CloseOutline, EditSolid, TrashBinSolid } from 'flowbite-svelte-icons';
+	import {
+		BarsOutline,
+		CheckOutline,
+		CloseOutline,
+		EditSolid,
+		TrashBinSolid
+	} from 'flowbite-svelte-icons';
 	import Accordion from './Accordion.svelte';
-	import { slide } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 
 	export let medicines: Medicine[];
@@ -75,10 +81,25 @@
 		toEdit = -1;
 		toDelete = -1;
 	}
+
+	let open = false;
 </script>
 
-<form bind:this={formElement} method="POST" action="?/fromSidebar" use:enhance>
-	<div class="absolute right-0 top-0 h-screen flex flex-col items-center gap-8 bg-theme p-8 w-64">
+<p class="absolute h-12 w-12 top-0 right-0 z-40 mt-5 mr-5 xl:hidden">
+	{#if open}
+		<button class="h-12 w-12 bg-white rounded-full p-1" on:click={() => (open = false)}>
+			<CloseOutline />
+		</button>
+	{:else}
+		<button class="h-12 w-12 bg-white rounded-full p-1" on:click={() => (open = true)}>
+			<BarsOutline />
+		</button>
+	{/if}
+</p>
+<form class="h-full" bind:this={formElement} method="POST" action="?/fromSidebar" use:enhance>
+	<div
+		class={`z-30 absolute right-0 top-0 h-full flex flex-col items-center gap-6 bg-theme p-8 w-full sm:w-64 ${open ? 'block' : 'hidden'} xl:m-0 xl:flex`}
+	>
 		<div class="bg-[#333333] rounded-lg px-1 py-2 flex justify-center w-full">
 			<span class="text-3xl font-bold text-white">{curTime}</span>
 		</div>

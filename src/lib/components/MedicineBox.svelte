@@ -55,7 +55,7 @@
 	}
 </script>
 
-<div class="grid grid-cols-4 grid-rows-2 mx-auto gap-8">
+<div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 mx-auto gap-8">
 	{#each sectors as { timestamp, medicines }, i}
 		<button
 			on:click={() => selectedSector.set(i)}
@@ -102,7 +102,7 @@
 		</button>
 	{/each}
 </div>
-<div class="flex flex-row gap-6 justify-center">
+<div class="flex flex-row gap-6 justify-center pb-8">
 	<form method="POST" action="?/fromMedBox" use:enhance>
 		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
 		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn"

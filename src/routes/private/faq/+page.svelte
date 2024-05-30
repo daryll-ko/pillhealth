@@ -6,12 +6,12 @@
 </script>
 
 <div
-	class="flex flex-row h-screen bg-[url('/src/lib/assets/FAQ.png')] bg-right bg-no-repeat bg scaled-bg mb-10"
+	class="flex flex-row h-screen md:bg-[url('/src/lib/assets/FAQ.png')] bg-right bg-no-repeat bg scaled-bg mb-10"
 >
-	<div class="flex flex-col w-[80%] gap-8">
-		<div class="text-[#333333] text-left flex flex-col gap-3 ml-20 w-[70%]">
-			<h1 class="text-4xl font-bold">Frequently Asked Questions</h1>
-			<p class="text-2xl mb-10">Learn how PillHealth can treat you better.</p>
+	<div class="flex flex-col items-center py-10 md:items-start w-full md:w-[80%] gap-8">
+		<div class="text-[#333333] text-left flex flex-col gap-3 md:ml-20 w-[70%]">
+			<h1 class="text-2xl md:text-3xl font-bold leading-9 md:mt-10">Frequently Asked Questions</h1>
+			<p class="text-lg sm:text-xl md:text-2xl mb-10">Learn how PillHealth can treat you better.</p>
 			<div>
 				<ExpansionPanel
 					name="How do I add a medicine?"
@@ -96,8 +96,8 @@
 				</ExpansionPanel>
 				<ExpansionPanel name="What if I need technical support?" bind:group on:change={onchage}>
 					<div>
-						Feel free to email us at pillhealth145@gmail.com and we will get back to you as soon as
-						possible to provide assistance.
+						Feel free to email us at <pre class="px-1 inline">pillhealth145@gmail.com</pre>
+						 and we will get back to you as soon as possible to provide assistance.
 					</div>
 				</ExpansionPanel>
 			</div>

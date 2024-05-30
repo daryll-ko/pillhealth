@@ -18,13 +18,15 @@
 	<MedicineDialog {medicines} />
 {/if}
 
-<div class="flex flex-col w-[80%] gap-12">
-	<div class="text-[#333333] text-center flex flex-col gap-3">
-		<h1 class="text-4xl font-bold">It's time to take your pills!</h1>
-		<p class="text-2xl">Consistency is key to better health.</p>
+<div class="flex flex-col gap-12">
+	<div class="flex flex-col xl:w-[80%] gap-12 max-h-screen">
+		<div class="mt-6 text-[#333333] text-center flex flex-col gap-3">
+			<h1 class="text-3xl md:text-4xl font-bold">It's time to take your pills!</h1>
+			<p class="text-2xl">Consistency is key to better health.</p>
+		</div>
+		{#if data.user !== null}
+			<MedicineBox {medicines} user={userData} />
+		{/if}
 	</div>
-	{#if data.user !== null}
-		<MedicineBox {medicines} user={userData} />
-	{/if}
 </div>
 <Sidebar {medicines} user={userData} />

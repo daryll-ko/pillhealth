@@ -4,7 +4,7 @@
 <!-- Adapted from https://tuk.dev/components/marketing/page_section/about -->
 
 <div class="flex flex-col h-screen">
-	<div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+	<div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-9">
 		<div class="flex flex-col lg:flex-row justify-between gap-8">
 			<div class="w-full lg:w-5/12 flex flex-col justify-center">
 				<h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
@@ -49,12 +49,12 @@
 				</p>
 			</div>
 			<div class="w-full lg:w-8/12 lg:pt-8">
-				<div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 rounded-md">
+				<div class="grid sm:grid-cols-3 grid-cols-1 lg:gap-4 rounded-md">
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
-							alt="Alexa featured Image"
+							alt="Alexa featured"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Pauline</p>
 					</div>
@@ -62,7 +62,7 @@
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
-							alt="Olivia featured Image"
+							alt="Olivia featured"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Immanuel</p>
 					</div>
@@ -70,17 +70,17 @@
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png"
-							alt="Liam featued Image"
+							alt="Liam featued"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Daryll</p>
 					</div>
 				</div>
-				<div class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
+				<div class="grid sm:grid-cols-3 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
-							alt="Alexa featured Image"
+							alt="Alexa featured"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Westin</p>
 					</div>
@@ -88,7 +88,7 @@
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
-							alt="Olivia featured Image"
+							alt="Olivia featured"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Rohan</p>
 					</div>
@@ -96,7 +96,7 @@
 						<img
 							class="md:block hidden"
 							src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png"
-							alt="Liam featued Image"
+							alt="Liam featued"
 						/>
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Jela</p>
 					</div>
