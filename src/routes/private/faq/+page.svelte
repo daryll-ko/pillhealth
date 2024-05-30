@@ -97,7 +97,7 @@
 				<ExpansionPanel name="What if I need technical support?" bind:group on:change={onchage}>
 					<div>
 						Feel free to email us at <pre class="px-1 inline">pillhealth145@gmail.com</pre>
-						 and we will get back to you as soon as possible to provide assistance.
+						and we will get back to you as soon as possible to provide assistance.
 					</div>
 				</ExpansionPanel>
 			</div>

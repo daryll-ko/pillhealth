@@ -10,7 +10,7 @@
 		TrashBinSolid
 	} from 'flowbite-svelte-icons';
 	import Accordion from './Accordion.svelte';
-	import { fade, fly, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 
 	export let medicines: Medicine[];
@@ -181,30 +181,42 @@
 										type="submit"
 										disabled={toEdit !== -1 && i !== toEdit}
 										class="icon-btn bg-theme/60 hover:bg-theme/80 disabled:hover:bg-theme/60"
-										><CheckOutline /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<CheckOutline />
+										</p>
+									</button>
 									<button
 										on:click={() => (i === toEdit ? (toEdit = -1) : (toDelete = -1))}
 										type="button"
 										disabled={toDelete !== -1 && i !== toDelete}
 										class="icon-btn bg-red-500/60 hover:bg-red-500/80 disabled:hover:bg-red-500/60"
-										><CloseOutline /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<CloseOutline />
+										</p>
+									</button>
 								{:else}
 									<button
 										on:click={() => (toEdit = i)}
 										type="button"
 										disabled={toDelete !== -1 || (toEdit !== -1 && i !== toEdit)}
 										class="icon-btn bg-theme/60 hover:bg-theme/80 disabled:hover:bg-theme/60"
-										><EditSolid /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<EditSolid />
+										</p>
+									</button>
 									<button
 										on:click={() => (toDelete = i)}
 										type="button"
 										disabled={toEdit !== -1 || (toDelete !== -1 && i !== toDelete)}
 										class="icon-btn bg-red-500/60 hover:bg-red-500/80 disabled:hover:bg-red-500/60"
-										><TrashBinSolid /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<TrashBinSolid />
+										</p>
+									</button>
 								{/if}
 							</div>
 						</div>

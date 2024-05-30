@@ -27,7 +27,9 @@
 				on:click={handleClick}
 				class="py-1 group transition-all hover:scale-105 flex flex-row justify-center items-center gap-1 w-full disabled:hover:scale-100"
 			>
-				<span class="text-theme/70 group-hover:text-theme/90">
+				<span
+					class="text-theme/70 group-hover:text-theme/90 h-6 w-6 flex justify-center items-center"
+				>
 					{#if open}
 						<AngleUpOutline />
 					{:else}
@@ -35,7 +37,9 @@
 					{/if}
 				</span>
 				<span>Description</span>
-				<span class="text-theme/70 group-hover:text-theme/90">
+				<span
+					class="text-theme/70 group-hover:text-theme/90 h-6 w-6 flex justify-center items-center"
+				>
 					{#if open}
 						<AngleUpOutline />
 					{:else}
