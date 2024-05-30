@@ -133,15 +133,17 @@ export async function createEmail(type: number, supabase: SupabaseClient, medLis
 		// switch case type 1 2 3
 		let subject = '';
 		let body = '';
+		let html = '';
 		switch (type) {
 			case 1:
 				subject = `[ALERT] Time to take your medicine!`;
-				body = `Here are the medicines you have to take: ${medList.join(', ')}`;
+				body = `This is a friendly reminder to take your medicine. The indicated medicines has been prepared and dispensed by the medbox. Please take them as prescribed.`;
+				html = `<h3>Here are the medicines you have to take: ${medList.join(', ')} </h3><pre>${body}</pre>`;
 				break;
 			case 2:
 				subject = '[REMINDER] No more set dispenses!';
-				body =
-					'You have no more set dispenses! Please refill your compartments to continue receiving reminders.';
+				body = 'Your PillHealth device has no remaining scheduled dispenses. Please refill your compartments to continue receiving reminders.';
+				html = `<h3>Refill reminder.</h3><pre>${body}</pre>`;
 				break;
 			default:
 				subject = '';
@@ -149,7 +151,7 @@ export async function createEmail(type: number, supabase: SupabaseClient, medLis
 				break;
 		}
 
-		let html = `<h2>Hi!</h2><pre>${body}</pre>`;
+		
 
 		const message = {
 			from: GOOGLE_EMAIL,
