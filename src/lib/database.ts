@@ -306,6 +306,8 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 			throw clearError;
 		}
 
+		await updateCurrentSector(sector, supabase);
+
 		if (await checkNoSetDispenses(supabase)) {
 			console.log('No more set dispenses!');
 			await createEmail(2, supabase, []);
@@ -315,6 +317,26 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 		throw new Error('User is not logged in');
 	}
 	// console.log(`Compartment ${sector} cleared successfully.`);
+}
+
+export async function updateCurrentSector(sector: number, supabase: SupabaseClient) {
+	let loggedInUID: null | string = null;
+	const { data: authData } = await supabase.auth.getUser();
+	loggedInUID = authData.user?.id ?? null;
+
+	if (loggedInUID) {
+		const { error } = await supabase
+			.from('user')
+			.update({
+				current_sector: sector
+			})
+			.eq('user_id', loggedInUID);
+
+		if (error) {
+			console.error('Error updating user:', error);
+			throw error;
+		}
+	}
 }
 
 export async function getLogs(supabase: SupabaseClient): Promise<Log[]> {

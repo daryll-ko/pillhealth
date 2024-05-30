@@ -151,7 +151,8 @@ export async function createEmail(type: number, supabase: SupabaseClient, medLis
 				break;
 			case 2:
 				subject = '[REMINDER] No more set dispenses!';
-				body = 'Your PillHealth device has no remaining scheduled dispenses. Please refill your compartments to continue receiving reminders.';
+				body =
+					'Your PillHealth device has no remaining scheduled dispenses. Please refill your compartments to continue receiving reminders.';
 				html = `<h3>Refill reminder.</h3><pre>${body}</pre>`;
 				break;
 			default:
@@ -159,8 +160,6 @@ export async function createEmail(type: number, supabase: SupabaseClient, medLis
 				body = '';
 				break;
 		}
-
-		
 
 		const message = {
 			from: GOOGLE_EMAIL,
