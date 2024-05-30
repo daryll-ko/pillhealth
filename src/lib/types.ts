@@ -27,6 +27,7 @@ export interface User {
 	sector_6?: Date;
 	sector_7?: Date;
 	sector_8?: Date;
+	alarm: number;
 }
 
 export interface Database {

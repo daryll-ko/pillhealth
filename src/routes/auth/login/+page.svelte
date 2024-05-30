@@ -5,37 +5,15 @@
 </script>
 
 <div class="flex flex-row h-screen">
-	<div class="w-[70%] flex flex-col gap-10 justify-center items-center gap-10">
+	<div class="w-full md:w-[70%] flex flex-col gap-10 justify-center items-center">
 		<img src={logo} width="500" alt="PillHealth logo" />
-		<form class="w-[50%] flex flex-col gap-8" method="POST" action="?/login">
+		<form class="w-[60%] md:w-[50%] flex flex-col gap-8" method="POST" action="?/login">
 			<h1 class="font-bold text-4xl">Login</h1>
 			<div class="flex flex-col gap-1">
 				<div class="relative w-full bg-white">
-					<!-- <input
-						class="peer bg-white w-full h-full py-3 px-4 border-2 border-solid border-[#c0c0c0] rounded-md focus:outline-none focus:border-theme"
-						name="email"
-						type="email"
-					/> -->
-					<Textfield
-						autocomplete="off"
-						type="email"
-						label="Email"
-						name="email"
-						required
-						outlined
-					/>
+					<Textfield autocomplete="off" type="email" label="Email" name="email" required outlined />
 				</div>
 				<div class="relative w-full bg-white">
-					<!-- <span
-						class="absolute bg-white px-1 -top-2 left-4 text-xs rounded-md text-[#c0c0c0] font-bold peer-focus:text-theme"
-						>Password</span
-					> -->
-					<!-- <input
-						class="w-full h-full bg-white py-3 px-4 border-2 border-solid border-[#c0c0c0] rounded-md focus:outline-none focus:border-theme focus:text-theme"
-						name="password"
-						type="password"
-						placeholder="Password"
-					/> -->
 					<Textfield
 						autocomplete="off"
 						type="password"
@@ -46,15 +24,18 @@
 					/>
 				</div>
 			</div>
-			<button class="bg-theme rounded-lg w-[20%] py-3 font-semibold text-lg text-white"
-				>Login</button
-			>
+			<button class="btn px-3 py-2 font-semibold text-lg text-white">Login</button>
 		</form>
-		<div class="relative bg-[#c0c0c0]/60 w-[50%] h-[2px] rounded-md">
-			<p class="absolute bg-white w-[60%] -top-3 left-28 text-center">
-				Don't have an account? <a href="/auth/register">Register</a>
+		<div class="w-[60%] md:w-[50%] flex flex-row justify-center items-center">
+			<!-- <p class="w-[20%] md:w-[10%] h-[2px] bg-[#c0c0c0]"></p> -->
+			<p class="bg-white px-2 text-center">
+				Don't have an account? <a
+					class="text-theme transition-all hover:underline"
+					href="/auth/register">Register</a
+				>
 			</p>
+			<!-- <p class="w-[20%] md:w-[10%] h-[2px] bg-[#c0c0c0]"></p> -->
 		</div>
 	</div>
-	<img src={plant} class="w-[30%] object-cover object-left" alt="Plant" />
+	<img src={plant} class="md:block md:w-[30%] md:object-cover md:object-left hidden" alt="Plant" />
 </div>

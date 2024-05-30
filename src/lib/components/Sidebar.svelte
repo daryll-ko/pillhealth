@@ -2,7 +2,13 @@
 	import { selectedSector, dialogOpen } from '$lib/stores';
 	import type { Medicine, User } from '$lib/types';
 
-	import { CheckOutline, CloseOutline, EditSolid, TrashBinSolid } from 'flowbite-svelte-icons';
+	import {
+		BarsOutline,
+		CheckOutline,
+		CloseOutline,
+		EditSolid,
+		TrashBinSolid
+	} from 'flowbite-svelte-icons';
 	import Accordion from './Accordion.svelte';
 	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
@@ -75,10 +81,31 @@
 		toEdit = -1;
 		toDelete = -1;
 	}
+
+	let open = false;
 </script>
 
-<form bind:this={formElement} method="POST" action="?/fromSidebar" use:enhance>
-	<div class="absolute right-0 top-0 h-screen flex flex-col items-center gap-8 bg-theme p-8 w-64">
+<p class="absolute h-12 w-12 top-0 right-0 z-40 mt-5 mr-5 xl:hidden">
+	{#if open}
+		<button
+			class="h-12 w-12 flex justify-center items-center bg-white rounded-full p-1"
+			on:click={() => (open = false)}
+		>
+			<CloseOutline />
+		</button>
+	{:else}
+		<button
+			class="h-12 w-12 flex justify-center items-center bg-white rounded-full p-1"
+			on:click={() => (open = true)}
+		>
+			<BarsOutline />
+		</button>
+	{/if}
+</p>
+<form class="h-full" bind:this={formElement} method="POST" action="?/fromSidebar" use:enhance>
+	<div
+		class={`z-30 absolute right-0 top-0 h-full flex flex-col items-center gap-6 bg-theme p-8 w-full sm:w-64 ${open ? 'block' : 'hidden'} xl:m-0 xl:flex`}
+	>
 		<div class="bg-[#333333] rounded-lg px-1 py-2 flex justify-center w-full">
 			<span class="text-3xl font-bold text-white">{curTime}</span>
 		</div>
@@ -160,30 +187,42 @@
 										type="submit"
 										disabled={toEdit !== -1 && i !== toEdit}
 										class="icon-btn bg-theme/60 hover:bg-theme/80 disabled:hover:bg-theme/60"
-										><CheckOutline /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<CheckOutline />
+										</p>
+									</button>
 									<button
 										on:click={() => (i === toEdit ? (toEdit = -1) : (toDelete = -1))}
 										type="button"
 										disabled={toDelete !== -1 && i !== toDelete}
 										class="icon-btn bg-red-500/60 hover:bg-red-500/80 disabled:hover:bg-red-500/60"
-										><CloseOutline /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<CloseOutline />
+										</p>
+									</button>
 								{:else}
 									<button
 										on:click={() => (toEdit = i)}
 										type="button"
 										disabled={toDelete !== -1 || (toEdit !== -1 && i !== toEdit)}
 										class="icon-btn bg-theme/60 hover:bg-theme/80 disabled:hover:bg-theme/60"
-										><EditSolid /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<EditSolid />
+										</p>
+									</button>
 									<button
 										on:click={() => (toDelete = i)}
 										type="button"
 										disabled={toEdit !== -1 || (toDelete !== -1 && i !== toDelete)}
 										class="icon-btn bg-red-500/60 hover:bg-red-500/80 disabled:hover:bg-red-500/60"
-										><TrashBinSolid /></button
 									>
+										<p class="h-6 w-6 flex justify-center items-center">
+											<TrashBinSolid />
+										</p>
+									</button>
 								{/if}
 							</div>
 						</div>

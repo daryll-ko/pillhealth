@@ -15,7 +15,7 @@
 		user.sector_6,
 		user.sector_7,
 		user.sector_8
-	].map((timestamp) => (timestamp ? new Date(timestamp) : null ));
+	].map((timestamp) => (timestamp ? new Date(timestamp) : null));
 
 	let medicinesPerSector: Medicine[][];
 	$: medicinesPerSector = medicines
@@ -54,7 +54,7 @@
 	}
 </script>
 
-<div class="grid grid-cols-4 grid-rows-2 mx-auto gap-8">
+<div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 mx-auto gap-8">
 	{#each sectors as { timestamp, medicines }, i}
 		<button
 			on:click={() => selectedSector.set(i)}
@@ -85,7 +85,9 @@
 				>
 					<p>{timestamp ? timestamp.toLocaleString('default', { weekday: 'long' }) : ''}</p>
 					<p>
-						{@html timestamp ? timestamp.toLocaleString('default', { timeStyle: 'short' }) : 'Click to<br>set time'}
+						{@html timestamp
+							? timestamp.toLocaleString('default', { timeStyle: 'short' })
+							: 'Click to<br>set time'}
 					</p>
 				</div>
 			</div>
@@ -99,12 +101,13 @@
 		</button>
 	{/each}
 </div>
-<div class="flex flex-row gap-6 justify-center">
-	<form method="POST" action="?/fromMedBox" use:enhance>
+<div class="flex flex-row gap-6 justify-center pb-8">
+	<!-- <form method="POST" action="?/fromMedBox" use:enhance>
 		<input name="selectedSectorValue" bind:value={selectedSectorValue} type="hidden" />
-		<button  type="submit" class="btn">Take medications</button> 
-		<!-- on:click={() => dispense(selectedSectorValue)} -->
-	</form>
+		<button on:click={() => dispense(selectedSectorValue)} type="submit" class="btn"
+			>Take medications</button
+		>
+	</form> -->
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button
 	>

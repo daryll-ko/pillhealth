@@ -10,7 +10,7 @@
 
 @layer components {
 	.btn {
-		@apply bg-theme/80 text-white rounded-xl text-xl font-bold py-2 px-6 hover:bg-theme transition-all disabled:bg-gray-300;
+		@apply bg-theme/80 text-white rounded-xl md:text-lg font-bold py-1 px-3 hover:bg-theme transition-all disabled:bg-gray-300;
 	}
 	.icon-btn {
 		@apply w-8 h-8 flex justify-center items-center text-white transition-all disabled:text-white/20;

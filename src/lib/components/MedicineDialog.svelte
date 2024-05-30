@@ -19,7 +19,7 @@
 	$: addable = medicines.filter((med) => !med.in_sectors.includes(selectedSectorValue));
 
 	let toAdd: Medicine | null;
-	$: toAdd = null, medicines;
+	$: (toAdd = null), medicines;
 
 	let medId: number;
 	$: medId = toAdd ? toAdd.id : 0;
@@ -58,22 +58,20 @@
 			>
 		</div>
 		<br />
-		<form method="POST" action="?/fromMedDialog" use:enhance={({formData}) => {
-			formData.append('name', name)
-			formData.append('description', description)
-			}}>
+		<form
+			method="POST"
+			action="?/fromMedDialog"
+			use:enhance={({ formData }) => {
+				formData.append('name', name);
+				formData.append('description', description);
+			}}
+		>
 			<input name="sector" bind:value={selectedSectorValue} type="hidden" />
 			<input name="proceed" bind:value={proceed} type="hidden" />
 			<input name="med_id" bind:value={medId} type="hidden" />
 			{#if selectedSectorValue === -1}
 				<div class="relative w-full bg-white">
-					<Textfield
-						bind:value={name}
-						autocomplete="off"
-						label="Name"
-						required
-						outlined
-					/>
+					<Textfield bind:value={name} autocomplete="off" label="Name" required outlined />
 				</div>
 				<div class="relative w-full bg-white">
 					<Textfield

@@ -1,7 +1,6 @@
 import type { Log, Medicine, User } from './types';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { createJob } from '../hooks.server';
-import { create } from 'domain';
 import { createEmail } from '../hooks.server';
 
 export async function setDispenseTime(sector: number, time: Date, supabase: SupabaseClient) {
@@ -14,7 +13,7 @@ export async function setDispenseTime(sector: number, time: Date, supabase: Supa
 	if (loggedInUID) {
 		const updateData: { [key: string]: Date } = {};
 		updateData[columnName] = time;
-		console.log("setDispenseTime gets", time);
+		console.log('setDispenseTime gets', time);
 
 		const { error } = await supabase.from('user').update(updateData).eq('user_id', loggedInUID);
 
@@ -47,7 +46,16 @@ export async function checkNoSetDispenses(supabase: SupabaseClient): Promise<boo
 		throw new Error('User not found');
 	}
 
-	const sectors = [ 'sector_1', 'sector_2', 'sector_3', 'sector_4', 'sector_5', 'sector_6', 'sector_7', 'sector_8'];
+	const sectors = [
+		'sector_1',
+		'sector_2',
+		'sector_3',
+		'sector_4',
+		'sector_5',
+		'sector_6',
+		'sector_7',
+		'sector_8'
+	];
 	for (const sector of sectors) {
 		if (data[sector]) {
 			return false;
@@ -92,12 +100,17 @@ export async function getMedicines(supabase: SupabaseClient): Promise<Medicine[]
 	return data;
 }
 
-export async function addMedicine(name: string, color: string, description: string, supabase: SupabaseClient) {
+export async function addMedicine(
+	name: string,
+	color: string,
+	description: string,
+	supabase: SupabaseClient
+) {
 	const { error } = await supabase.from('medicine').insert({
 		name,
 		color,
 		description,
-		in_sectors: [],
+		in_sectors: []
 	});
 
 	if (error) {
@@ -115,18 +128,46 @@ export async function removeMedicine(medicine_id: number, supabase: SupabaseClie
 	}
 }
 
-export async function editMedicine(id: number, name: string, description: string, supabase: SupabaseClient) {
+export async function editMedicine(
+	id: number,
+	name: string,
+	description: string,
+	supabase: SupabaseClient
+) {
 	const { error } = await supabase
 		.from('medicine')
 		.update({
 			name,
-			description,
+			description
 		})
 		.eq('id', id);
 
 	if (error) {
 		console.error('Error updating medicine:', error);
 		throw error;
+	}
+}
+
+export async function editAlarm(num: number, supabase: SupabaseClient) {
+	let loggedInUID: null | string = null;
+	const { data: authData } = await supabase.auth.getUser();
+	loggedInUID = authData.user?.id ?? null;
+
+	if (loggedInUID) {
+		const { error } = await supabase
+			.from('user')
+			.update({
+				alarm: num
+			})
+			.eq('user_id', loggedInUID);
+
+		if (error) {
+			console.error('Error updating alarm:', error);
+			throw error;
+		}
+	} else {
+		console.error('User is not logged in');
+		throw new Error('User is not logged in');
 	}
 }
 
@@ -227,7 +268,7 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 		console.error('No medicines found');
 		throw new Error('No medicines found');
 	}
-	
+
 	for (const medicine of data) {
 		const { id, in_sectors } = medicine;
 
@@ -254,25 +295,25 @@ export async function clearCompartment(sector: number, supabase: SupabaseClient)
 		const updateData: { [key: string]: Date | null } = {};
 		updateData[columnName] = null;
 
-		const { error: clearError } = await supabase.from('user').update(updateData).eq('user_id', loggedInUID);
+		const { error: clearError } = await supabase
+			.from('user')
+			.update(updateData)
+			.eq('user_id', loggedInUID);
 		if (clearError) {
-				console.error('Error updating dispense time:', clearError);
-				throw clearError;
-			} 
+			console.error('Error updating dispense time:', clearError);
+			throw clearError;
+		}
 
 		if (await checkNoSetDispenses(supabase)) {
 			console.log('No more set dispenses!');
 			await createEmail(2, supabase, []);
 		}
-
-	}
-	else {
+	} else {
 		console.error('User is not logged in');
 		throw new Error('User is not logged in');
 	}
 	// console.log(`Compartment ${sector} cleared successfully.`);
 }
-
 
 export async function getLogs(supabase: SupabaseClient): Promise<Log[]> {
 	const { data, error } = await supabase.from('log').select();
@@ -314,7 +355,7 @@ export async function addLog(log: Log, supabase: SupabaseClient) {
 export async function getUser(supabase: SupabaseClient): Promise<User> {
 	const { data, error } = await supabase.from('user').select().single();
 
-	console.log("getUser gets", data);
+	console.log('getUser gets', data);
 
 	if (error) {
 		console.error('Error getting user:', error);
