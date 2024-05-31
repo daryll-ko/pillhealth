@@ -108,6 +108,9 @@
 			>Take medications</button
 		>
 	</form> -->
+	<form method="POST" action="?/demo" use:enhance>
+		<button type="submit" class="btn" formaction="?/demo">Demo</button>
+	</form>
 	<button disabled={selectedSectorValue === -1} class="btn" on:click={() => selectedSector.set(-1)}
 		>See all medications</button
 	>

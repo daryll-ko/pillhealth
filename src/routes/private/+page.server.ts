@@ -77,8 +77,6 @@ export const actions: Actions = {
 		const sector = Number(formData.get('sector'));
 		const date = new Date(String(formData.get('date')));
 
-		console.log('setTime gets', date);
-
 		await db.setDispenseTime(sector, date, supabase);
 
 		return {
@@ -89,12 +87,34 @@ export const actions: Actions = {
 	alarm: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 
-		console.log(formData);
-
 		const alarm = Number(formData.get('alarm'));
 
 		await db.editAlarm(alarm, supabase);
 
+		return {
+			medicines: await db.getMedicines(supabase),
+			userData: await db.getUser(supabase)
+		};
+	},
+	demo: async ({ locals: { supabase } }) => {
+		const meds = await db.getMedicines(supabase);
+		if (meds) {
+			if (meds[0]) {
+				if (!meds[0].in_sectors.includes(0)) {
+					await db.addPillToSector(meds[0].id, 0, supabase);
+				}
+				if (!meds[0].in_sectors.includes(3)) {
+					await db.addPillToSector(meds[0].id, 3, supabase);
+				}
+			}
+			if (meds[1]) {
+				if (!meds[1].in_sectors.includes(3)) {
+					await db.addPillToSector(meds[1].id, 3, supabase);
+				}
+			}
+		}
+		await db.setDispenseTime(0, new Date(new Date().getTime() + 60 * 1000), supabase);
+		await db.setDispenseTime(3, new Date(new Date().getTime() + 120 * 1000), supabase);
 		return {
 			medicines: await db.getMedicines(supabase),
 			userData: await db.getUser(supabase)
