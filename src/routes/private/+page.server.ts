@@ -97,24 +97,20 @@ export const actions: Actions = {
 		};
 	},
 	demo: async ({ locals: { supabase } }) => {
-		const meds = await db.getMedicines(supabase);
+		const meds = (await db.getMedicines(supabase)).sort((a, b) => a.id - b.id);
 		if (meds) {
-			if (meds[0]) {
-				if (!meds[0].in_sectors.includes(0)) {
-					await db.addPillToSector(meds[0].id, 0, supabase);
-				}
-				if (!meds[0].in_sectors.includes(3)) {
-					await db.addPillToSector(meds[0].id, 3, supabase);
-				}
-			}
-			if (meds[1]) {
-				if (!meds[1].in_sectors.includes(3)) {
-					await db.addPillToSector(meds[1].id, 3, supabase);
+			for (let j = 0; j < 4; ++j) {
+				if (meds[j]) {
+					for (let i = 0; i < 8; ++i) {
+						if (!meds[j].in_sectors.includes(i) && Math.random() < 1 / (1 << (j + 1))) {
+							await db.addPillToSector(meds[j].id, i, supabase);
+						}
+					}
 				}
 			}
 		}
-		await db.setDispenseTime(0, new Date(new Date().getTime() + 60 * 1000), supabase);
-		await db.setDispenseTime(3, new Date(new Date().getTime() + 120 * 1000), supabase);
+		// await db.setDispenseTime(0, new Date(new Date().getTime() + 60 * 1000), supabase);
+		// await db.setDispenseTime(3, new Date(new Date().getTime() + 120 * 1000), supabase);
 		return {
 			medicines: await db.getMedicines(supabase),
 			userData: await db.getUser(supabase)
