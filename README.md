@@ -6,7 +6,7 @@
 
 _for legal reasons, the logo is a joke_
 
-<img src="./static/product.png" alt="PillHealth product" width="50%" />
+<img src="./static/product.png" alt="PillHealth product" width="75%" />
 
 </div>
 
