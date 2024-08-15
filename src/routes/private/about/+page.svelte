@@ -29,11 +29,7 @@
 				</p>
 			</div>
 			<div class="w-full lg:w-8/12">
-				<img
-					class="w-full h-full"
-					src={group}
-					alt="A group of People"
-				/>
+				<img class="w-full h-full" src={group} alt="A group of People" />
 			</div>
 		</div>
 
@@ -59,53 +55,29 @@
 			<div class="w-full lg:w-8/12 lg:pt-8">
 				<div class="grid sm:grid-cols-3 grid-cols-1 lg:gap-4 rounded-md">
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden scale-x-[-1]"
-							src={pau}
-							alt="Alexa featured"
-						/>
+						<img class="md:block hidden scale-x-[-1]" src={pau} alt="Alexa featured" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Pauline</p>
 					</div>
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden"
-							src={imman}
-							alt="Olivia featured"
-						/>
+						<img class="md:block hidden" src={imman} alt="Olivia featured" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Immanuel</p>
 					</div>
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden"
-							src={daryll}
-							alt="Daryll"
-						/>
+						<img class="md:block hidden" src={daryll} alt="Daryll" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Daryll</p>
 					</div>
 				</div>
 				<div class="grid sm:grid-cols-3 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden"
-							src={westin}
-							alt="Alexa featured"
-						/>
+						<img class="md:block hidden" src={westin} alt="Alexa featured" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Westin</p>
 					</div>
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden"
-							src={rohan}
-							alt="Olivia featured"
-						/>
+						<img class="md:block hidden" src={rohan} alt="Olivia featured" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Rohan</p>
 					</div>
 					<div class="p-4 pb-6 flex justify-center flex-col items-center">
-						<img
-							class="md:block hidden"
-							src={jela}
-							alt="Liam featued"
-						/>
+						<img class="md:block hidden" src={jela} alt="Liam featued" />
 						<p class="font-medium text-xl leading-5 text-gray-800 g mt-4">Jela</p>
 					</div>
 				</div>
