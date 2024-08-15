@@ -10,8 +10,6 @@ _for legal reasons, the logo is a joke_
 
 </div>
 
-<br/>
-
 **PillHealth** is a smart medicine box. You **store** medicines, you **schedule** your doses, and you **take** them when it's time to.
 
 PillHealth also provides logs of **what** you've taken and **when** you've taken it, so you know whether you're on track with your health management.
