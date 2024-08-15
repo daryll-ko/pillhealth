@@ -15,3 +15,5 @@ _for legal reasons, the logo is a joke_
 PillHealth also provides logs of **what** you've taken and **when** you've taken, so you know whether you're on track with your health management.
 
 The core of PillHealth is the trusty **ESP8266 microcontroller**, which interfaces with a **Supabase** instance via **Arduino**. The Supabase instance data is used by the frontend, which is made using **SvelteKit**.
+
+PillHealth ended up as the Champion of **IoT Cup 2024**, hosted by UP Diliman's [Department of Computer Science](https://dcs.upd.edu.ph/) and [Enstack](https://www.enstack.com/?srsltid=AfmBOoorOGdszTT63GqqFQVd6jSPfM-uO9tdw0qW_fz5gSXL9RThQ-Yz).
